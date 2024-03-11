@@ -1,20 +1,55 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+[[_TOC_]]
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+# Code Build Deploy Blog Service
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+The Code Build Deploy Blog Service.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+The site is deployed to [Azure App Services](https://azure.microsoft.com/en-gb/products/app-service).
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+[![Build Status](https://markpollard.visualstudio.com/CodeBuildDeploy/_apis/build/status%2FCodeBuildDeploy.Blogs?branchName=master)](https://markpollard.visualstudio.com/CodeBuildDeploy/_build/latest?definitionId=4&branchName=master)
+
+# Standard DotNet Build
+
+## Building
+
+```bash
+dotnet build
+```
+
+## Publishing
+
+```bash
+dotnet publish ./CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj -v n --framework net8.0 --self-contained:false --no-restore -o ./publish/net8.0
+```
+
+## Running
+
+```bash
+ dotnet run ./CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj
+```
+
+# Docker Build
+
+## Building
+
+```powershell
+. .\build.ps1
+```
+
+## Publishing
+
+```powershell
+docker push codebuilddeploy.azurecr.io/code-build-deploy-blogs:latest
+```
+
+## Pulling
+
+```powershell
+docker pull codebuilddeploy.azurecr.io/code-build-deploy-blogs:latest
+```
+
+## Running
+
+```powershell
+. .\run.ps1
+```

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs", "CodeBuildDeploy.Blogs\CodeBuildDeploy.Blogs.csproj", "{C62EF7EE-8FCC-4BA7-BE9A-155F363DD79B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.DataAccess", "CodeBuildDeploy.DataAccess\CodeBuildDeploy.DataAccess.csproj", "{C224F40E-683B-4416-9342-F96D3475F140}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C62EF7EE-8FCC-4BA7-BE9A-155F363DD79B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C62EF7EE-8FCC-4BA7-BE9A-155F363DD79B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C62EF7EE-8FCC-4BA7-BE9A-155F363DD79B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C62EF7EE-8FCC-4BA7-BE9A-155F363DD79B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C224F40E-683B-4416-9342-F96D3475F140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C224F40E-683B-4416-9342-F96D3475F140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C224F40E-683B-4416-9342-F96D3475F140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C224F40E-683B-4416-9342-F96D3475F140}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {03A80A84-5882-40C2-8105-66B1E6DB99D7}
+	EndGlobalSection
+EndGlobal

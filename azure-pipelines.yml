@@ -17,7 +17,7 @@ variables:
   dockerfilePath: '$(Build.SourcesDirectory)/CodeBuildDeploy.Blogs/Dockerfile'
   tag: '$(Build.BuildNumber)'
   resourceGroup: 'codebuilddeploy-rg'
-  containerAppName: 'codebuilddeploy'
+  containerAppName: 'codebuilddeploy-blogs'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'

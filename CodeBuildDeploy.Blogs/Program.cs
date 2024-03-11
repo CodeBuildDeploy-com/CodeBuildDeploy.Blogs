@@ -1,25 +1,77 @@
-var builder = WebApplication.CreateBuilder(args);
+using Serilog;
+using Serilog.Formatting.Json;
+using Serilog.Extensions.Hosting;
 
-// Add services to the container.
+var logConfiguration = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.Async(a => a.Console(new JsonFormatter()));
+var reloadableLogger = logConfiguration.CreateBootstrapLogger();
+Log.Logger = reloadableLogger;
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+try
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    Log.Information("Creating WebApplicationBuilder");
+    var builder = WebApplication.CreateBuilder(args);
+
+    Log.Information("Reconfiguring Logging");
+    await ConfigureLoggingAsync(builder, reloadableLogger);
+
+    Log.Information("Configuring Services");
+    await ConfigureServicesAsync(builder);
+
+    Log.Information("Building WebApplication");
+    var app = builder.Build();
+
+    Log.Information("Configuring WebApplication");
+    await ConfigureAppAsync(app);
+
+    Log.Information("Running WebApplication");
+    await app.RunAsync();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Unhandled Exception");
+}
+finally
+{
+    Log.Information("WebApplication Shutdown");
+    Log.CloseAndFlush();
 }
 
-app.UseHttpsRedirection();
+static async Task ConfigureLoggingAsync(WebApplicationBuilder builder, ReloadableLogger reloadableLogger)
+{
+    reloadableLogger.Reload(config => config.ReadFrom.Configuration(builder.Configuration)
+                                            .Enrich.FromLogContext()
+                                            .WriteTo.Async(a => a.Console(new JsonFormatter())));
+    Log.Logger = reloadableLogger.Freeze();
 
-app.UseAuthorization();
+    builder.Host.UseSerilog();
+    await Task.CompletedTask;
+}
 
-app.MapControllers();
+static async Task ConfigureServicesAsync(WebApplicationBuilder builder)
+{
+    // Add services to the container.
+    builder.Services.AddControllers();
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
 
-app.Run();
+    await Task.CompletedTask;
+}
+
+static async Task ConfigureAppAsync(WebApplication app)
+{
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseHttpsRedirection();
+
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    await Task.CompletedTask;
+}

@@ -1,11 +1,7 @@
-using System.Collections.Generic;
-using System.Linq;
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using CodeBuildDeploy.Blogs.Contract;
-using DataAccess = CodeBuildDeploy.DataAccess;
 
 namespace CodeBuildDeploy.Blogs.Controllers;
 
@@ -41,7 +37,11 @@ public class BlogController : ControllerBase
     [HttpGet(Name = "GetAllPosts")]
     public IList<Post> GetAllPosts()
     {
-        var dbPosts = _session.Posts.Where(p => p.Published)
+        var dbPosts = _session.Posts
+                    .Include(p => p.Category)
+                    .Include(p => p.PostTags)
+                    .ThenInclude(pt => pt.Tag)
+                    .Where(p => p.Published)
                     .OrderByDescending(p => p.PostedOn)
                     .ToList();
 

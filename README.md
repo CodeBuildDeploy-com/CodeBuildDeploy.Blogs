@@ -6,7 +6,7 @@ The Code Build Deploy Blog Service.
 
 The site is deployed to [Azure App Services](https://azure.microsoft.com/en-gb/products/app-service).
 
-[![Build Status](https://markpollard.visualstudio.com/CodeBuildDeploy/_apis/build/status%2FCodeBuildDeploy.Blogs?branchName=master)](https://markpollard.visualstudio.com/CodeBuildDeploy/_build/latest?definitionId=4&branchName=master)
+[![Build Status](https://markpollard.visualstudio.com/CodeBuildDeploy/_apis/build/status%2FCodeBuildDeploy.Blogs?branchName=main)](https://markpollard.visualstudio.com/CodeBuildDeploy/_build/latest?definitionId=6&branchName=main)
 
 # Standard DotNet Build
 

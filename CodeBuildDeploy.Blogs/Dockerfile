@@ -1,4 +1,3 @@
-
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS base
 # Turn off Invariant mode and install icu packages for EntityFramework. 
 # See: https://github.com/dotnet/SqlClient/issues/220
@@ -6,22 +5,25 @@ RUN apk add --no-cache icu-libs
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 443
+EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 # Turn off Invariant mode and install icu packages for EntityFramework. 
 # See: https://github.com/dotnet/SqlClient/issues/220
 RUN apk add --no-cache icu-libs
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
-WORKDIR /
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
 COPY ["CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj", "CodeBuildDeploy.Blogs/"]
-RUN dotnet restore "CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj"
+COPY ["CodeBuildDeploy.DataAccess/CodeBuildDeploy.DataAccess.csproj", "CodeBuildDeploy.DataAccess/"]
+RUN dotnet restore "./CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj"
 COPY . .
-WORKDIR "/CodeBuildDeploy.Blogs"
-RUN dotnet build "CodeBuildDeploy.Blogs.csproj" -c Release -o /app/build
+WORKDIR "/src/CodeBuildDeploy.Blogs"
+RUN dotnet build "./CodeBuildDeploy.Blogs.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "CodeBuildDeploy.Blogs.csproj" -c Release -o /app/publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./CodeBuildDeploy.Blogs.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

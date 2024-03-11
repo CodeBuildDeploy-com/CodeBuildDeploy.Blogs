@@ -1,6 +1,8 @@
 using Serilog;
 using Serilog.Formatting.Json;
 using Serilog.Extensions.Hosting;
+using CodeBuildDeploy.DataAccess;
+using Microsoft.EntityFrameworkCore;
 
 var logConfiguration = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.Async(a => a.Console(new JsonFormatter()));
 var reloadableLogger = logConfiguration.CreateBootstrapLogger();
@@ -49,6 +51,16 @@ static async Task ConfigureLoggingAsync(WebApplicationBuilder builder, Reloadabl
 
 static async Task ConfigureServicesAsync(WebApplicationBuilder builder)
 {
+    // These are the Account Db connections that want removing
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(
+            builder.Configuration.GetConnectionString("AccountConnection")));
+    builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+    // Blogs Db connections
+    builder.Services.AddDbContext<DAContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("BlogConnection")));
+
     // Add services to the container.
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

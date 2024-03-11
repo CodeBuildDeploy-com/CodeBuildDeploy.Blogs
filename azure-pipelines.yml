@@ -3,7 +3,7 @@ name: 1.0.$(Rev:r)
 trigger:
   branches:
     include:
-    - refs/heads/master
+    - refs/heads/main
   batch: True
 
 resources:

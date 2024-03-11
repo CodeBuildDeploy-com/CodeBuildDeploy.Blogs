@@ -72,12 +72,8 @@ static async Task ConfigureServicesAsync(WebApplicationBuilder builder)
 
 static async Task ConfigureAppAsync(WebApplication app)
 {
-    // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
-    {
-        app.UseSwagger();
-        app.UseSwaggerUI();
-    }
+    app.UseSwagger();
+    app.UseSwaggerUI();
 
     app.UseHttpsRedirection();
 

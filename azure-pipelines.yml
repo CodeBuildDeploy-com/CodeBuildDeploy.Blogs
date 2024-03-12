@@ -35,7 +35,7 @@ stages:
       displayName: 'Authenticate to NuGet'
     - task: CmdLine@2
       inputs:
-        script: 'echo $(VSS_NUGET_ACCESSTOKEN)'
+        script: 'echo Token is $(VSS_NUGET_ACCESSTOKEN)'
     - task: Docker@2
       displayName: buildAndPush
       inputs:

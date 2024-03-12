@@ -7,7 +7,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs", "Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.DataAccess", "CodeBuildDeploy.Blogs.DataAccess\CodeBuildDeploy.Blogs.DataAccess.csproj", "{C224F40E-683B-4416-9342-F96D3475F140}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeBuildDeploy.Blogs.Contract", "CodeBuildDeploy.Blogs.Contract\CodeBuildDeploy.Blogs.Contract.csproj", "{FFFDE7FC-6A75-41A4-B9A5-54C8E4D12A36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.Contract", "CodeBuildDeploy.Blogs.Contract\CodeBuildDeploy.Blogs.Contract.csproj", "{FFFDE7FC-6A75-41A4-B9A5-54C8E4D12A36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3E5240B5-CA3D-4C8E-A5F7-CAD6D703AD0B}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
+		build.ps1 = build.ps1
+		local_variables.env.example = local_variables.env.example
+		nuget.config = nuget.config
+		run.ps1 = run.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

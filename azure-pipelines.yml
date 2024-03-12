@@ -34,13 +34,23 @@ stages:
     - task: NuGetAuthenticate@1
       displayName: 'Authenticate to NuGet'
     - task: Docker@2
-      displayName: buildAndPush
+      displayName: Docker Build
       inputs:
+        command: build
         containerRegistry: $(dockerRegistryServiceConnection)
         repository: $(imageRepository)
+        tags: |
+          latest
+          $(Build.BuildNumber)
         Dockerfile: $(dockerfilePath)
         buildContext: .
-        arguments: '--build-arg CBD_FEED_ACCESSTOKEN=SomeToken'
+        arguments: '--build-arg CBD_FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN)'
+    - task: Docker@2
+      displayName: Docker Push
+      inputs:
+        command: push
+        containerRegistry: $(dockerRegistryServiceConnection)
+        repository: $(imageRepository)
         tags: |
           latest
           $(Build.BuildNumber)

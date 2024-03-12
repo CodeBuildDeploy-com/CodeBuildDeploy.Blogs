@@ -5,12 +5,11 @@ param(
 
 $buildParams = @()
 
-$buildParams += @("--build-arg CBD_FEED_ACCESSTOKEN=$($Env:CBD_FEED_ACCESSTOKEN)")
+$buildParams += @('--build-arg')
+$buildParams += @("CBD_FEED_ACCESSTOKEN=$($Env:CBD_FEED_ACCESSTOKEN)")
 if ($NoCache) {
     $buildParams += @('--no-cache')
 }
-
-echo @buildParams
 
 docker build @buildParams -t codebuilddeploy.azurecr.io/code-build-deploy-blogs:latest -f ./CodeBuildDeploy.Blogs/Dockerfile .
 

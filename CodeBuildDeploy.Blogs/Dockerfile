@@ -13,7 +13,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 RUN apk add --no-cache icu-libs
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 RUN curl -L https://raw.githubusercontent.com/Microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh  | sh
-ARG CBD_FEED_ACCESSTOKEN = "Something"
+ARG CBD_FEED_ACCESSTOKEN="Something"
 RUN echo "Token is" $CBD_FEED_ACCESSTOKEN
 ENV VSS_NUGET_EXTERNAL_FEED_ENDPOINTS="{\"endpointCredentials\": [{\"endpoint\":\"https://markpollard.pkgs.visualstudio.com/CodeBuildDeploy/_packaging/CodeBuildDeploy/nuget/v3/index.json\", \"username\":\"docker\", \"password\":\"${CBD_FEED_ACCESSTOKEN}\"}]}"
 RUN echo $VSS_NUGET_EXTERNAL_FEED_ENDPOINTS

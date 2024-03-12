@@ -40,7 +40,7 @@ stages:
         repository: $(imageRepository)
         Dockerfile: $(dockerfilePath)
         buildContext: .
-        arguments: '--build-arg CBD_FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN)'
+        arguments: '--build-arg CBD_FEED_ACCESSTOKEN=SomeToken'
         tags: |
           latest
           $(Build.BuildNumber)

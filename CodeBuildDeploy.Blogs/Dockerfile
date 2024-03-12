@@ -14,7 +14,9 @@ RUN apk add --no-cache icu-libs
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 RUN curl -L https://raw.githubusercontent.com/Microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh  | sh
 ARG CBD_FEED_ACCESSTOKEN
+RUN echo 'Token is $CBD_FEED_ACCESSTOKEN'
 ENV VSS_NUGET_EXTERNAL_FEED_ENDPOINTS="{\"endpointCredentials\": [{\"endpoint\":\"https://markpollard.pkgs.visualstudio.com/CodeBuildDeploy/_packaging/CodeBuildDeploy/nuget/v3/index.json\", \"username\":\"docker\", \"password\":\"${CBD_FEED_ACCESSTOKEN}\"}]}"
+RUN echo $VSS_NUGET_EXTERNAL_FEED_ENDPOINTS
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj", "CodeBuildDeploy.Blogs/"]

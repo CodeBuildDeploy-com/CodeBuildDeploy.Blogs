@@ -51,12 +51,6 @@ static async Task ConfigureLoggingAsync(WebApplicationBuilder builder, Reloadabl
 
 static async Task ConfigureServicesAsync(WebApplicationBuilder builder)
 {
-    // These are the Account Db connections that want removing
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(
-            builder.Configuration.GetConnectionString("AccountConnection")));
-    builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            .AddEntityFrameworkStores<ApplicationDbContext>();
     // Blogs Db connections
     builder.Services.AddDbContext<DAContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("BlogConnection")));

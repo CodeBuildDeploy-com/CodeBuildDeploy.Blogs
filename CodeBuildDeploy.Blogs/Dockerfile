@@ -17,6 +17,7 @@ WORKDIR /src
 COPY ["CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj", "CodeBuildDeploy.Blogs/"]
 COPY ["CodeBuildDeploy.Blogs.Contract/CodeBuildDeploy.Blogs.Contract.csproj", "CodeBuildDeploy.Blogs.Contract/"]
 COPY ["CodeBuildDeploy.Blogs.DataAccess/CodeBuildDeploy.Blogs.DataAccess.csproj", "CodeBuildDeploy.Blogs.DataAccess/"]
+COPY ["./nuget.config", "./"]
 RUN dotnet restore "./CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj"
 COPY . .
 WORKDIR "/src/CodeBuildDeploy.Blogs"

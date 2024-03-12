@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CodeBuildDeploy.Blogs.Contract\CodeBuildDeploy.Blogs.Contract.csproj" />
-    <ProjectReference Include="..\CodeBuildDeploy.DataAccess\CodeBuildDeploy.DataAccess.csproj" />
+    <ProjectReference Include="..\CodeBuildDeploy.Blogs.DataAccess\CodeBuildDeploy.Blogs.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

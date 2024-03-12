@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs", "CodeBuildDeploy.Blogs\CodeBuildDeploy.Blogs.csproj", "{C62EF7EE-8FCC-4BA7-BE9A-155F363DD79B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.DataAccess", "CodeBuildDeploy.DataAccess\CodeBuildDeploy.DataAccess.csproj", "{C224F40E-683B-4416-9342-F96D3475F140}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.DataAccess", "CodeBuildDeploy.Blogs.DataAccess\CodeBuildDeploy.Blogs.DataAccess.csproj", "{C224F40E-683B-4416-9342-F96D3475F140}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeBuildDeploy.Blogs.Contract", "CodeBuildDeploy.Blogs.Contract\CodeBuildDeploy.Blogs.Contract.csproj", "{FFFDE7FC-6A75-41A4-B9A5-54C8E4D12A36}"
 EndProject

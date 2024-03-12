@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CodeBuildDeploy.DataAccess
+namespace CodeBuildDeploy.Blogs.DataAccess
 {
     public class Post
     {

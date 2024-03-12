@@ -1,7 +1,7 @@
 using Serilog;
 using Serilog.Formatting.Json;
 using Serilog.Extensions.Hosting;
-using CodeBuildDeploy.DataAccess;
+using CodeBuildDeploy.Blogs.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 var logConfiguration = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.Async(a => a.Console(new JsonFormatter()));

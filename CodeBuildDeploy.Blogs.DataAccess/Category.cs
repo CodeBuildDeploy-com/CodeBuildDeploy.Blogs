@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CodeBuildDeploy.DataAccess
+namespace CodeBuildDeploy.Blogs.DataAccess
 {
-    public class Tag
+    public class Category
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual int Id { get; set; }
@@ -14,6 +14,6 @@ namespace CodeBuildDeploy.DataAccess
 
         public virtual string Description { get; set; }
 
-        public virtual IList<PostTag> PostTags { get; set; }
+        public virtual IList<Post> Posts { get; set; }
     }
 }

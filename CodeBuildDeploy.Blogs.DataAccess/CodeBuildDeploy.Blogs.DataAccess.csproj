@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <AssemblyName>CodeBuildDeploy.DataAccess</AssemblyName>
+    <AssemblyName>CodeBuildDeploy.Blogs.DataAccess</AssemblyName>
     <AssemblyTitle>$(AssemblyName)</AssemblyTitle>
     <RootNamespace>$(AssemblyName)</RootNamespace>
     <Company>codebuilddeploy</Company>

@@ -32,6 +32,7 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - checkout: self
+    - task: NuGetAuthenticate@1
     - task: Docker@2
       displayName: buildAndPush
       inputs:
@@ -39,6 +40,7 @@ stages:
         repository: $(imageRepository)
         Dockerfile: $(dockerfilePath)
         buildContext: .
+        arguments: '--build-arg FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN)'
         tags: $(tag)
 - stage: DeployProd
   displayName: Deploy Blogs service Prod

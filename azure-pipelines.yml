@@ -32,10 +32,6 @@ stages:
     steps:
     - checkout: self
     - task: NuGetAuthenticate@1
-    - task: NuGetCommand@2
-      inputs:
-        command: 'custom'
-        arguments: 'sources Update -Name "CodeBuildDeploy" -Source "https://markpollard.pkgs.visualstudio.com/CodeBuildDeploy/_packaging/CodeBuildDeploy/nuget/v3/index.json" -username any -password $(System.AccessToken) -ConfigFile nuget.config -StorePasswordInClearText'
     - task: Docker@2
       displayName: buildAndPush
       inputs:
@@ -43,6 +39,7 @@ stages:
         repository: $(imageRepository)
         Dockerfile: $(dockerfilePath)
         buildContext: .
+        arguments: '--build-arg CBD_FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN)'
         tags: |
           latest
           $(Build.BuildNumber)

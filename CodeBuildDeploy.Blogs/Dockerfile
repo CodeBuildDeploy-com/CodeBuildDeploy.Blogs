@@ -12,6 +12,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 # See: https://github.com/dotnet/SqlClient/issues/220
 RUN apk add --no-cache icu-libs
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+RUN curl -L https://raw.githubusercontent.com/Microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh  | sh
+ARG CBD_FEED_ACCESSTOKEN
+ENV VSS_NUGET_EXTERNAL_FEED_ENDPOINTS="{\"endpointCredentials\": [{\"endpoint\":\"https://markpollard.pkgs.visualstudio.com/CodeBuildDeploy/_packaging/CodeBuildDeploy/nuget/v3/index.json\", \"username\":\"docker\", \"password\":\"${CBD_FEED_ACCESSTOKEN}\"}]}"
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj", "CodeBuildDeploy.Blogs/"]

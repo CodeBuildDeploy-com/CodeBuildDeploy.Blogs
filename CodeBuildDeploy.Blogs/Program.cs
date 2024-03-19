@@ -1,8 +1,7 @@
 using Serilog;
 using Serilog.Formatting.Json;
 using Serilog.Extensions.Hosting;
-using CodeBuildDeploy.Blogs.Data;
-using Microsoft.EntityFrameworkCore;
+
 using CodeBuildDeploy.Blogs.DI;
 
 var logConfiguration = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.Async(a => a.Console(new JsonFormatter()));
@@ -18,7 +17,7 @@ try
     await ConfigureLoggingAsync(builder, reloadableLogger);
 
     Log.Information("Configuring Services");
-    await ConfigureServicesAsync(builder);
+    builder.Services.ConfigureApiServices();
 
     Log.Information("Building WebApplication");
     var app = builder.Build();
@@ -47,18 +46,6 @@ static async Task ConfigureLoggingAsync(WebApplicationBuilder builder, Reloadabl
     Log.Logger = reloadableLogger.Freeze();
 
     builder.Host.UseSerilog();
-    await Task.CompletedTask;
-}
-
-static async Task ConfigureServicesAsync(WebApplicationBuilder builder)
-{
-    // Blogs Db connections
-    builder.Services.AddDbContext<DAContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("BlogConnection")));
-
-    // Add services to the container.
-    builder.Services.ConfigureApiServices();
-
     await Task.CompletedTask;
 }
 

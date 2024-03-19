@@ -14,6 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
+    <ProjectReference Include="..\CodeBuildDeploy.Blogs.Data\CodeBuildDeploy.Blogs.Data.csproj" />
   </ItemGroup>
 </Project>

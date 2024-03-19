@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CodeBuildDeploy.Blogs.Data
+using CodeBuildDeploy.Blogs.Data.Entities;
+
+namespace CodeBuildDeploy.Blogs.Data.EF
 {
-    public class DAContext : DbContext
+    public sealed class DAContext : DbContext
     {
         public DAContext(DbContextOptions<DAContext> options)
             : base(options)

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CodeBuildDeploy.Blogs.Data.Entities;
 
 namespace CodeBuildDeploy.Blogs.BusinessLogic.Mapping
 {
@@ -6,9 +7,9 @@ namespace CodeBuildDeploy.Blogs.BusinessLogic.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<Data.Category, Contract.Dto.Category>();
-            CreateMap<Data.Tag, Contract.Dto.Tag>();
-            CreateMap<Data.Post, Contract.Dto.Post>();
+            CreateMap<Category, Contract.Dto.Category>();
+            CreateMap<Tag, Contract.Dto.Tag>();
+            CreateMap<Post, Contract.Dto.Post>();
         }
     }
 }

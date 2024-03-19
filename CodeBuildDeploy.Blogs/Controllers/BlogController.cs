@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-using CodeBuildDeploy.Blogs.Contract;
+using MediatR;
+
 using CodeBuildDeploy.Blogs.Contract.Dto;
+using CodeBuildDeploy.Blogs.BusinessLogic.Requests;
 
 namespace CodeBuildDeploy.Blogs.Controllers;
 
@@ -11,28 +13,24 @@ namespace CodeBuildDeploy.Blogs.Controllers;
 public class BlogController : ControllerBase
 {
     private readonly ILogger<BlogController> _logger;
-    private readonly Data.DAContext _session;
 
-    public BlogController(ILogger<BlogController> logger, Data.DAContext session)
+    private readonly Data.EF.DAContext _session;
+
+    private readonly IMediator _mediator;
+
+    public BlogController(ILogger<BlogController> logger, Data.EF.DAContext session, IMediator mediator)
     {
         _logger = logger;
         _session = session;
+        _mediator = mediator;
     }
 
     [HttpGet(Name = "GetAllCategories")]
-    public IList<Category> GetAllCategories()
+    public async Task<ActionResult<IList<Category>>> GetAllCategories()
     {
-        var dbCategories = _session.Categories
-                    .Include(c => c.Posts)
-                    .Where(c => c.Posts.Any()).ToList();
+        var categories = await _mediator.Send(new GetAllCategoriesRequest());
 
-        return dbCategories.Select(
-            x => new Category 
-            { 
-                Id = x.Id, 
-                Name = x.Name, 
-                Description = x.Description 
-            }).ToList();
+        return Ok(categories);
     }
 
     [HttpGet(Name = "GetAllPosts")]

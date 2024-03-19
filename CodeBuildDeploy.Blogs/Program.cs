@@ -1,8 +1,9 @@
 using Serilog;
 using Serilog.Formatting.Json;
 using Serilog.Extensions.Hosting;
-using CodeBuildDeploy.Blogs.DataAccess;
+using CodeBuildDeploy.Blogs.Data;
 using Microsoft.EntityFrameworkCore;
+using CodeBuildDeploy.Blogs.DI;
 
 var logConfiguration = new LoggerConfiguration().Enrich.FromLogContext().WriteTo.Async(a => a.Console(new JsonFormatter()));
 var reloadableLogger = logConfiguration.CreateBootstrapLogger();
@@ -56,10 +57,7 @@ static async Task ConfigureServicesAsync(WebApplicationBuilder builder)
             options.UseSqlServer(builder.Configuration.GetConnectionString("BlogConnection")));
 
     // Add services to the container.
-    builder.Services.AddControllers();
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
+    builder.Services.ConfigureApiServices();
 
     await Task.CompletedTask;
 }

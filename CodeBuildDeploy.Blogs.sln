@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs", "CodeBuildDeploy.Blogs\CodeBuildDeploy.Blogs.csproj", "{C62EF7EE-8FCC-4BA7-BE9A-155F363DD79B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.DataAccess", "CodeBuildDeploy.Blogs.DataAccess\CodeBuildDeploy.Blogs.DataAccess.csproj", "{C224F40E-683B-4416-9342-F96D3475F140}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.Data", "CodeBuildDeploy.Blogs.DataAccess\CodeBuildDeploy.Blogs.Data.csproj", "{C224F40E-683B-4416-9342-F96D3475F140}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.Contract", "CodeBuildDeploy.Blogs.Contract\CodeBuildDeploy.Blogs.Contract.csproj", "{FFFDE7FC-6A75-41A4-B9A5-54C8E4D12A36}"
 EndProject
@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		nuget.config = nuget.config
 		run.ps1 = run.ps1
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.BusinessLogic", "CodeBuildDeploy.Blogs.BusinessLogic\CodeBuildDeploy.Blogs.BusinessLogic.csproj", "{571F00FC-8268-43A9-B6DB-F6E278D743EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 		{FFFDE7FC-6A75-41A4-B9A5-54C8E4D12A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFFDE7FC-6A75-41A4-B9A5-54C8E4D12A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFFDE7FC-6A75-41A4-B9A5-54C8E4D12A36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{571F00FC-8268-43A9-B6DB-F6E278D743EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{571F00FC-8268-43A9-B6DB-F6E278D743EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{571F00FC-8268-43A9-B6DB-F6E278D743EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{571F00FC-8268-43A9-B6DB-F6E278D743EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

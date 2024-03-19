@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using CodeBuildDeploy.Blogs.Contract;
+using CodeBuildDeploy.Blogs.Contract.Dto;
 
 namespace CodeBuildDeploy.Blogs.Controllers;
 
@@ -10,9 +11,9 @@ namespace CodeBuildDeploy.Blogs.Controllers;
 public class BlogController : ControllerBase
 {
     private readonly ILogger<BlogController> _logger;
-    private readonly DataAccess.DAContext _session;
+    private readonly Data.DAContext _session;
 
-    public BlogController(ILogger<BlogController> logger, DataAccess.DAContext session)
+    public BlogController(ILogger<BlogController> logger, Data.DAContext session)
     {
         _logger = logger;
         _session = session;

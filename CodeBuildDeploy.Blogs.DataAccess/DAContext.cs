@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CodeBuildDeploy.Blogs.DataAccess
+namespace CodeBuildDeploy.Blogs.Data
 {
     public class DAContext : DbContext
     {

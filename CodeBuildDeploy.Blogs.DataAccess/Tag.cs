@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CodeBuildDeploy.Blogs.DataAccess
+namespace CodeBuildDeploy.Blogs.Data
 {
     public class Tag
     {

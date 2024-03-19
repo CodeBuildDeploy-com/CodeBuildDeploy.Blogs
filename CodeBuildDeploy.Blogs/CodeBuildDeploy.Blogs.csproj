@@ -19,8 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CodeBuildDeploy.Blogs.BusinessLogic\CodeBuildDeploy.Blogs.BusinessLogic.csproj" />
     <ProjectReference Include="..\CodeBuildDeploy.Blogs.Contract\CodeBuildDeploy.Blogs.Contract.csproj" />
-    <ProjectReference Include="..\CodeBuildDeploy.Blogs.DataAccess\CodeBuildDeploy.Blogs.DataAccess.csproj" />
+    <ProjectReference Include="..\CodeBuildDeploy.Blogs.DataAccess\CodeBuildDeploy.Blogs.Data.csproj" />
   </ItemGroup>
 
 </Project>

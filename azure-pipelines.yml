@@ -34,12 +34,6 @@ stages:
       displayName: 'Checkout Blogs Repo'
     - task: NuGetAuthenticate@1
       displayName: 'Authenticate to NuGet'
-    - task: NuGetCommand@2
-      inputs:
-        command: 'restore'
-        restoreSolution: './CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj'
-        feedsToUse: 'config'
-        nugetConfigPath: './nuget.config'
     - task: Docker@2
       displayName: Docker Build
       inputs:

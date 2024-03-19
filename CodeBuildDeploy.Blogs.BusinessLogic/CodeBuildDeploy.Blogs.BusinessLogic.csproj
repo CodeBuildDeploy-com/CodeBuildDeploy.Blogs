@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CodeBuildDeploy.Blogs.Contract\CodeBuildDeploy.Blogs.Contract.csproj" />
-    <ProjectReference Include="..\CodeBuildDeploy.Blogs.DataAccess\CodeBuildDeploy.Blogs.Data.csproj" />
+    <ProjectReference Include="..\CodeBuildDeploy.Blogs.Data\CodeBuildDeploy.Blogs.Data.csproj" />
   </ItemGroup>
 
 </Project>

@@ -24,7 +24,9 @@ ARG PACKAGE_VERSION=0.0.0-local
 WORKDIR /src
 COPY ["CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj", "CodeBuildDeploy.Blogs/"]
 COPY ["CodeBuildDeploy.Blogs.Contract/CodeBuildDeploy.Blogs.Contract.csproj", "CodeBuildDeploy.Blogs.Contract/"]
-COPY ["CodeBuildDeploy.Blogs.DataAccess/CodeBuildDeploy.Blogs.DataAccess.csproj", "CodeBuildDeploy.Blogs.DataAccess/"]
+COPY ["CodeBuildDeploy.Blogs.BusinessLogic/CodeBuildDeploy.Blogs.BusinessLogic.csproj", "CodeBuildDeploy.Blogs.BusinessLogic/"]
+COPY ["CodeBuildDeploy.Blogs.Data/CodeBuildDeploy.Blogs.Data.csproj", "CodeBuildDeploy.Blogs.Data/"]
+COPY ["CodeBuildDeploy.Blogs.Data.EF/CodeBuildDeploy.Blogs.Data.EF.csproj", "CodeBuildDeploy.Blogs.Data.EF/"]
 COPY ["./nuget.config", "./"]
 RUN dotnet restore "./CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj"
 COPY . .

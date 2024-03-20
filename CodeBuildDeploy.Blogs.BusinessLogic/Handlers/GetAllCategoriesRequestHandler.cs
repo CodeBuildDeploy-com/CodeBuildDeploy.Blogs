@@ -13,11 +13,11 @@ namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
     {
         private readonly ILogger<GetAllCategoriesRequestHandler> _logger;
 
-        private readonly IQueryRunner<AllCategoriesQuery, IList<Category>> _queryRunner;
+        private readonly IQueryRunner<AllCategoriesQuery, IList<Data.Entities.Category>> _queryRunner;
 
         private readonly IMapper _mapper;
 
-        public GetAllCategoriesRequestHandler(IQueryRunner<AllCategoriesQuery, IList<Category>> queryRunner, IMapper mapper, ILogger<GetAllCategoriesRequestHandler> logger)
+        public GetAllCategoriesRequestHandler(IQueryRunner<AllCategoriesQuery, IList<Data.Entities.Category>> queryRunner, IMapper mapper, ILogger<GetAllCategoriesRequestHandler> logger)
         {
             _queryRunner = queryRunner;
             _mapper = mapper;

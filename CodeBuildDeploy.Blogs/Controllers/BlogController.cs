@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 using MediatR;
 
@@ -14,14 +13,11 @@ public class BlogController : ControllerBase
 {
     private readonly ILogger<BlogController> _logger;
 
-    private readonly Data.EF.DAContext _session;
-
     private readonly IMediator _mediator;
 
-    public BlogController(ILogger<BlogController> logger, Data.EF.DAContext session, IMediator mediator)
+    public BlogController(ILogger<BlogController> logger, IMediator mediator)
     {
         _logger = logger;
-        _session = session;
         _mediator = mediator;
     }
 
@@ -34,127 +30,34 @@ public class BlogController : ControllerBase
     }
 
     [HttpGet(Name = "GetAllPosts")]
-    public IList<Post> GetAllPosts()
+    public async Task<ActionResult<IList<Post>>> GetAllPosts()
     {
-        var dbPosts = _session.Posts
-                    .Include(p => p.Category)
-                    .Include(p => p.PostTags)
-                    .ThenInclude(pt => pt.Tag)
-                    .Where(p => p.Published)
-                    .OrderByDescending(p => p.PostedOn)
-                    .ToList();
+        var posts = await _mediator.Send(new GetAllPostsRequest());
 
-        return dbPosts.Select(
-            x => new Post
-            {
-                Id = x.Id,
-                UrlSlug = x.UrlSlug,
-                Title = x.Title,
-                ShortDescription = x.ShortDescription,
-                Description = x.Description,
-                Content = x.Content,
-                Published = x.Published,
-                PostedOn = x.PostedOn,
-                Modified = x.Modified,
-                Category = new Category
-                {
-                    Id = x.Category.Id,
-                    Name = x.Category.Name,
-                    Description = x.Category.Description
-                },
-                Tags = x.PostTags.Select(pt => 
-                            new Tag 
-                            { 
-                                Id = pt.Tag.Id,
-                                Name = pt.Tag.Name,
-                                Description = pt.Tag.Description
-
-                            }).ToList()
-            }).ToList();
+        return Ok(posts);
     }
 
-    [HttpGet(Name = "GetPosts")]
-    public IList<Post> GetPosts(int pageNo, int pageSize)
+    [HttpGet(Name = "GetPagedPosts")]
+    public async Task<ActionResult<IList<Post>>> GetPagedPosts(int pageNo, int pageSize)
     {
-        var dbPosts = _session.Posts
-                .Include(p => p.Category)
-                .Include(p => p.PostTags)
-                .ThenInclude(pt => pt.Tag)
-                .Where(p => p.Published)
-                .OrderByDescending(p => p.PostedOn)
-                .Skip(pageNo * pageSize)
-                .Take(pageSize)
-                .ToList();
+        var posts = await _mediator.Send(new GetPagedPostsRequest(pageNo, pageSize));
 
-        return dbPosts.Select(
-            x => new Post
-            {
-                Id = x.Id,
-                UrlSlug = x.UrlSlug,
-                Title = x.Title,
-                ShortDescription = x.ShortDescription,
-                Description = x.Description,
-                Content = x.Content,
-                Published = x.Published,
-                PostedOn = x.PostedOn,
-                Modified = x.Modified,
-                Category = new Category
-                {
-                    Id = x.Category.Id,
-                    Name = x.Category.Name,
-                    Description = x.Category.Description
-                },
-                Tags = x.PostTags.Select(pt =>
-                            new Tag
-                            {
-                                Id = pt.Tag.Id,
-                                Name = pt.Tag.Name,
-                                Description = pt.Tag.Description
-
-                            }).ToList()
-            }).ToList();
+        return Ok(posts);
     }
 
     [HttpGet(Name = "GetPostByUrlSlug")]
-    public Post GetPostByUrlSlug(string urlSlug)
+    public async Task<ActionResult<Post>> GetPostByUrlSlug(string urlSlug)
     {
-        var dbPost = _session.Posts
-                .Include(p => p.Category)
-                .Include(p => p.PostTags)
-                .ThenInclude(pt => pt.Tag)
-                .Single(p => p.UrlSlug == urlSlug);
+        var posts = await _mediator.Send(new GetPostByUrlSlugRequest(urlSlug));
 
-        return new Post
-            {
-                Id = dbPost.Id,
-                UrlSlug = dbPost.UrlSlug,
-                Title = dbPost.Title,
-                ShortDescription = dbPost.ShortDescription,
-                Description = dbPost.Description,
-                Content = dbPost.Content,
-                Published = dbPost.Published,
-                PostedOn = dbPost.PostedOn,
-                Modified = dbPost.Modified,
-                Category = new Category
-                {
-                    Id = dbPost.Category.Id,
-                    Name = dbPost.Category.Name,
-                    Description = dbPost.Category.Description
-                },
-                Tags = dbPost.PostTags.Select(pt =>
-                            new Tag
-                            {
-                                Id = pt.Tag.Id,
-                                Name = pt.Tag.Name,
-                                Description = pt.Tag.Description
-
-                            }).ToList()
-            };
+        return Ok(posts);
     }
 
     [HttpGet(Name = "GetTotalPosts")]
-    public int GetTotalPosts()
+    public async Task<ActionResult<int>> GetTotalPosts()
     {
-        return _session.Posts.Count(p => p.Published);
+        var totalPosts = await _mediator.Send(new GetTotalPostsRequest());
+
+        return Ok(totalPosts);
     }
 }

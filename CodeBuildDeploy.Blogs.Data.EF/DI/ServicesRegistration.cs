@@ -16,6 +16,10 @@ namespace CodeBuildDeploy.Blogs.Data.EF
                 options.UseSqlServer(serviceProvider.GetService<IConfiguration>()!.GetConnectionString("BlogConnection")));
 
             services.AddScoped<IQueryRunner<AllCategoriesQuery, IList<Category>>, AllCategoriesQueryRunner>();
+            services.AddScoped<IQueryRunner<AllPostsQuery, IList<Post>>, AllPostsQueryRunner>();
+            services.AddScoped<IQueryRunner<PagedPostsQuery, IList<Post>>, PagedPostsQueryRunner>();
+            services.AddScoped<IQueryRunner<PostByUrlSlugQuery, Post>, PostByUrlSlugQueryRunner>();
+            services.AddScoped<IQueryRunner<TotalPostsQuery, int>, TotalPostsQueryRunner>();
             return services;
         }
     }

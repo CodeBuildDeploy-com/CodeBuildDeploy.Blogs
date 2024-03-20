@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 
 using CodeBuildDeploy.Blogs.Data.Entities;
 using CodeBuildDeploy.Blogs.Data.Queries;
-using Microsoft.AspNetCore.Http;
 
 namespace CodeBuildDeploy.Blogs.Data.EF.Queries
 {

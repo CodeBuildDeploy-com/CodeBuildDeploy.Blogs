@@ -34,7 +34,7 @@ variables:
     patch: 0
     version.assembly: $[format('{0}.{1}.{2}', variables['major'], variables['minor'], variables['patch'])]
     version.file: $[format('{0}.{1}', variables['version.assembly'], variables['Build.BuildId'])]
-    version.informational: $[format('{0}-{1}', variables['version.assembly'], variables['Build.SourceBranchName'])]
+    version.informational: $[format('{0}-{1}', variables['version.assembly'], variables['Build.SourceVersion'])]
   build.number: $[variables['version.informational']]
 
 name: $[variables['build.number']]

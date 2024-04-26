@@ -55,8 +55,14 @@ stages:
     - bash: |
         echo "isMain = $(isMain)"
         echo "isRelease = $(isRelease)"
+        echo "Build Number = $(Build.BuildNumber)"
         echo "Version Assembly = $(version.assembly)"
+        echo "Version File = $(version.file)"
+        echo "Version Informational = $(version.informational)"
+        echo "Version Major = $(major)"
+        echo "Version Minor = $(minor)"
         echo "Version Patch = $(patch)"
+      displayName: Output Version
 
     - task: NuGetAuthenticate@1
       displayName: 'Authenticate to NuGet'

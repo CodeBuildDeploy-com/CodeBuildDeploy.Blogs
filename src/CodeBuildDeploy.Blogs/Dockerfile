@@ -38,7 +38,7 @@ RUN dotnet build "./CodeBuildDeploy.Blogs.csproj" --no-restore -p:Version=${VERS
 
 FROM build AS publish
 WORKDIR "/work/src/CodeBuildDeploy.Blogs"
-RUN dotnet publish "./CodeBuildDeploy.Blogs.csproj" --no-build -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./CodeBuildDeploy.Blogs.csproj" --no-build -p:OutDir=/app/build -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

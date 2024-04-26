@@ -19,7 +19,6 @@ services:
       ASPNETCORE_URLS: https://+:5003
       ASPNETCORE_Kestrel__Certificates__Default__Password: $CERT_PASSWORD
       ASPNETCORE_Kestrel__Certificates__Default__Path: /https/code-build-deploy.pfx
-      ConnectionStrings__BlogConnection: "Server=tcp:codebuilddeploy.database.windows.net,1433;Database=codebuilddeploy;User ID=mark.pollard;Password=sqlServerAdm1n;Trusted_Connection=False;Encrypt=True;Connection Timeout=30"
     volumes:
       - ~/.aspnet/https:/https:ro
     ports:

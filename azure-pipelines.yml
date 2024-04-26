@@ -8,6 +8,9 @@ resources:
 - repo: self
 
 variables:
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+  isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')]
+
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'c3dcf114-3b01-4424-bee8-4c608be4829b'
   imageRepository: 'code-build-deploy-blogs'
@@ -22,12 +25,12 @@ variables:
   # Versioning
   major: 1
   minor: 1
-  ${{ if or(eq(variables['Build.SourceBranchName'], 'main'), startsWith(variables['Build.SourceBranchName'], 'release')) }}:
+  ${{ if or(eq(variables.isMain, 'true'), eq(variables.isRelease, 'true')) }}:
     patch: $[counter(format('{0}.{1}', variables['major'], variables['minor']), 0)]
     version.assembly: $[format('{0}.{1}.{2}', variables['major'], variables['minor'], variables['patch'])]
     version.file: $[format('{0}.{1}', variables['version.assembly'], variables['Build.BuildId'])]
     version.informational: $[variables['version.file']]
-  ${{ if and(ne(variables['Build.SourceBranchName'], 'main'), ne()) }}:
+  ${{ if and(ne(variables.isMain, 'true'), ne(variables.isRelease, 'true')) }}:
     patch: 0
     version.assembly: $[format('{0}.{1}.{2}', variables['major'], variables['minor'], variables['patch'])]
     version.file: $[format('{0}.{1}', variables['version.assembly'], variables['Build.BuildId'])]

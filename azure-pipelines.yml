@@ -25,12 +25,12 @@ variables:
   # Versioning
   major: 1
   minor: 1
-  ${{ if or(eq(variables['isMain'], 'true'), eq(variables['isRelease'], 'true')) }}:
+  ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['isRelease'], 'true')) }}:
     patch: $[counter(format('{0}.{1}', variables['major'], variables['minor']), 0)]
     version.assembly: $[format('{0}.{1}.{2}', variables['major'], variables['minor'], variables['patch'])]
     version.file: $[format('{0}.{1}', variables['version.assembly'], variables['Build.BuildId'])]
     version.informational: $[variables['version.file']]
-  ${{ if and(ne(variables['isMain'], 'true'), ne(variables['isRelease'], 'true')) }}:
+  ${{ if and(ne(variables['Build.SourceBranch'], 'refs/heads/main'), ne(variables['isRelease'], 'true')) }}:
     patch: 0
     version.assembly: $[format('{0}.{1}.{2}', variables['major'], variables['minor'], variables['patch'])]
     version.file: $[format('{0}.{1}', variables['version.assembly'], variables['Build.BuildId'])]
@@ -51,6 +51,12 @@ stages:
     - checkout: self
       displayName: 'Checkout Blogs Repo'
       persistCredentials: true
+
+    - bash: |
+        echo "isMain = $(version.isMain)"
+        echo "isRelease = $(version.isRelease)"
+        echo "Version Assembly = $(version.assembly)"
+        echo "Version Patch = $(version.patch)"
 
     - task: NuGetAuthenticate@1
       displayName: 'Authenticate to NuGet'

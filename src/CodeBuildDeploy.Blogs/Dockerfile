@@ -21,16 +21,16 @@ ARG ASSEMBLY_VERSION=0.0.0.0
 ARG FILE_VERSION=0.0.0.0
 ARG INFORMATIONAL_VERSION=0.0.0-local
 ARG PACKAGE_VERSION=0.0.0-local
-WORKDIR /src
-COPY ["CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj", "CodeBuildDeploy.Blogs/"]
-COPY ["CodeBuildDeploy.Blogs.Contract/CodeBuildDeploy.Blogs.Contract.csproj", "CodeBuildDeploy.Blogs.Contract/"]
-COPY ["CodeBuildDeploy.Blogs.BusinessLogic/CodeBuildDeploy.Blogs.BusinessLogic.csproj", "CodeBuildDeploy.Blogs.BusinessLogic/"]
-COPY ["CodeBuildDeploy.Blogs.Data/CodeBuildDeploy.Blogs.Data.csproj", "CodeBuildDeploy.Blogs.Data/"]
-COPY ["CodeBuildDeploy.Blogs.Data.EF/CodeBuildDeploy.Blogs.Data.EF.csproj", "CodeBuildDeploy.Blogs.Data.EF/"]
+WORKDIR /work
+COPY ["src/CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj", "src/CodeBuildDeploy.Blogs/"]
+COPY ["src/CodeBuildDeploy.Blogs.Contract/CodeBuildDeploy.Blogs.Contract.csproj", "src/CodeBuildDeploy.Blogs.Contract/"]
+COPY ["src/CodeBuildDeploy.Blogs.BusinessLogic/CodeBuildDeploy.Blogs.BusinessLogic.csproj", "src/CodeBuildDeploy.Blogs.BusinessLogic/"]
+COPY ["src/CodeBuildDeploy.Blogs.Data/CodeBuildDeploy.Blogs.Data.csproj", "src/CodeBuildDeploy.Blogs.Data/"]
+COPY ["src/CodeBuildDeploy.Blogs.Data.EF/CodeBuildDeploy.Blogs.Data.EF.csproj", "src/CodeBuildDeploy.Blogs.Data.EF/"]
 COPY ["./nuget.config", "./"]
-RUN dotnet restore "./CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj"
+RUN dotnet restore "./src/CodeBuildDeploy.Blogs/CodeBuildDeploy.Blogs.csproj"
 COPY . .
-WORKDIR "/src/CodeBuildDeploy.Blogs"
+WORKDIR "/work/src/CodeBuildDeploy.Blogs"
 RUN dotnet build "./CodeBuildDeploy.Blogs.csproj" -p:Version=${VERSION} -p:AssemblyVersion=${ASSEMBLY_VERSION} -p:FileVersion=${FILE_VERSION} -p:InformationalVersion=${INFORMATIONAL_VERSION} -p:PackageVersion=${PACKAGE_VERSION} -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

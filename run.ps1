@@ -1,1 +1,0 @@
-docker run --rm -it -p 5003:8080 --env-file local_variables.env codebuilddeploy.azurecr.io/code-build-deploy-blogs:latest

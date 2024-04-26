@@ -6,6 +6,14 @@
 *.user
 *.sln.docstates
 .vs/
+.vscode/
+.idea/
+
+##
+## Local Secrets
+##
+/.env
+/local_variables.env
 
 # Build results
 
@@ -155,8 +163,3 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
-
-##
-## Local Secrets
-##
-/local_variables.env

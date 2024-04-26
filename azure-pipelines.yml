@@ -55,7 +55,7 @@ stages:
     - bash: |
         echo "isMain = $(isMain)"
         echo "isRelease = $(isRelease)"
-        echo "Build Number = $(Build.BuildNumber)"
+        echo "Build Number = $(build.number)"
         echo "Version Assembly = $(version.assembly)"
         echo "Version File = $(version.file)"
         echo "Version Informational = $(version.informational)"
@@ -75,10 +75,10 @@ stages:
         repository: $(imageRepository)
         tags: |
           latest
-          $(Build.BuildNumber)
+          $(version.informational)
         Dockerfile: $(dockerfilePath)
         buildContext: .
-        arguments: '--build-arg FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN) --build-arg VERSION=$(Build.BuildNumber) --build-arg ASSEMBLY_VERSION=$(version.assembly) --build-arg FILE_VERSION=$(version.file) --build-arg INFORMATIONAL_VERSION=$(Build.BuildNumber) --build-arg PACKAGE_VERSION=$(Build.BuildNumber)'
+        arguments: '--build-arg FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN) --build-arg VERSION=$(version.informational) --build-arg ASSEMBLY_VERSION=$(version.assembly) --build-arg FILE_VERSION=$(version.file) --build-arg INFORMATIONAL_VERSION=$(version.informational) --build-arg PACKAGE_VERSION=$(version.informational)'
 
     - task: Docker@2
       displayName: Docker Push
@@ -88,11 +88,11 @@ stages:
         repository: $(imageRepository)
         tags: |
           latest
-          $(Build.BuildNumber)
+          $(version.informational)
 
     - script: |
-        git tag $(Build.BuildNumber)
-        git push origin $(Build.BuildNumber)
+        git tag $(version.informational)
+        git push origin $(version.informational)
       workingDirectory: $(Build.SourcesDirectory)
       condition: and(or(eq(variables['Build.SourceBranchName'], 'main'), startsWith(variables['Build.SourceBranchName'], 'release')), succeeded())
       displayName: Tag Version in Git
@@ -111,6 +111,6 @@ stages:
         azureSubscription: 'Visual Studio Premium with MSDN (a8c29995-b368-4d2a-b32a-db619e53639d)'
         containerAppName: $(containerAppName)
         resourceGroup: $(resourceGroup)
-        imageToDeploy: '$(containerRegistry)/$(imageRepository):$(Build.BuildNumber)'
+        imageToDeploy: '$(containerRegistry)/$(imageRepository):$(version.informational)'
         targetPort: '8080'
 ...

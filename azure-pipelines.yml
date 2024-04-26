@@ -15,7 +15,7 @@ variables:
   dockerRegistryServiceConnection: 'c3dcf114-3b01-4424-bee8-4c608be4829b'
   imageRepository: 'code-build-deploy-blogs'
   containerRegistry: 'codebuilddeploy.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/CodeBuildDeploy.Blogs/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/src/CodeBuildDeploy.Blogs/Dockerfile'
   resourceGroup: 'codebuilddeploy-rg'
   containerAppName: 'codebuilddeploy-blogs'
 

@@ -53,10 +53,10 @@ stages:
       persistCredentials: true
 
     - bash: |
-        echo "isMain = $(version.isMain)"
-        echo "isRelease = $(version.isRelease)"
+        echo "isMain = $(isMain)"
+        echo "isRelease = $(versi.isRelease)"
         echo "Version Assembly = $(version.assembly)"
-        echo "Version Patch = $(version.patch)"
+        echo "Version Patch = $(patch)"
 
     - task: NuGetAuthenticate@1
       displayName: 'Authenticate to NuGet'

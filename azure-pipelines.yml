@@ -1,5 +1,3 @@
-name: 1.0.$(Rev:r)
-
 trigger:
   branches:
     include:
@@ -10,16 +8,36 @@ resources:
 - repo: self
 
 variables:
+  isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+  isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')]
+
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'c3dcf114-3b01-4424-bee8-4c608be4829b'
   imageRepository: 'code-build-deploy-blogs'
   containerRegistry: 'codebuilddeploy.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/CodeBuildDeploy.Blogs/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/src/CodeBuildDeploy.Blogs/Dockerfile'
   resourceGroup: 'codebuilddeploy-rg'
   containerAppName: 'codebuilddeploy-blogs'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
+
+  # Versioning
+  major: 1
+  minor: 1
+  ${{ if or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')) }}:
+    patch: $[counter(format('{0}.{1}', variables['major'], variables['minor']), 0)]
+    version.assembly: $[format('{0}.{1}.{2}', variables['major'], variables['minor'], variables['patch'])]
+    version.file: $[format('{0}.{1}', variables['version.assembly'], variables['Build.BuildId'])]
+    version.informational: $[variables['version.file']]
+  ${{ if and(ne(variables['Build.SourceBranch'], 'refs/heads/main'), ne(startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'), 'True')) }}:
+    patch: 0
+    version.assembly: $[format('{0}.{1}.{2}', variables['major'], variables['minor'], variables['patch'])]
+    version.file: $[format('{0}.{1}', variables['version.assembly'], variables['Build.BuildId'])]
+    version.informational: $[format('{0}-{1}', variables['version.assembly'], variables['Build.SourceVersion'])]
+  build.number: $[variables['version.informational']]
+
+name: $[variables['build.number']]
 
 stages:
 - stage: Build
@@ -32,8 +50,23 @@ stages:
     steps:
     - checkout: self
       displayName: 'Checkout Blogs Repo'
+      persistCredentials: true
+
+    - bash: |
+        echo "isMain = $(isMain)"
+        echo "isRelease = $(isRelease)"
+        echo "Build Number = $(build.number)"
+        echo "Version Assembly = $(version.assembly)"
+        echo "Version File = $(version.file)"
+        echo "Version Informational = $(version.informational)"
+        echo "Version Major = $(major)"
+        echo "Version Minor = $(minor)"
+        echo "Version Patch = $(patch)"
+      displayName: Output Version
+
     - task: NuGetAuthenticate@1
       displayName: 'Authenticate to NuGet'
+
     - task: Docker@2
       displayName: Docker Build
       inputs:
@@ -42,10 +75,11 @@ stages:
         repository: $(imageRepository)
         tags: |
           latest
-          $(Build.BuildNumber)
+          $(version.informational)
         Dockerfile: $(dockerfilePath)
         buildContext: .
-        arguments: '--build-arg CBD_FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN)'
+        arguments: '--build-arg FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN) --build-arg VERSION=$(version.informational) --build-arg ASSEMBLY_VERSION=$(version.assembly) --build-arg FILE_VERSION=$(version.file) --build-arg INFORMATIONAL_VERSION=$(version.informational) --build-arg PACKAGE_VERSION=$(version.informational)'
+
     - task: Docker@2
       displayName: Docker Push
       inputs:
@@ -54,7 +88,15 @@ stages:
         repository: $(imageRepository)
         tags: |
           latest
-          $(Build.BuildNumber)
+          $(version.informational)
+
+    - script: |
+        git tag $(version.informational)
+        git push origin $(version.informational)
+      workingDirectory: $(Build.SourcesDirectory)
+      condition: and(or(eq(variables['Build.SourceBranchName'], 'main'), startsWith(variables['Build.SourceBranchName'], 'release')), succeeded())
+      displayName: Tag Version in Git
+
 - stage: DeployProd
   displayName: Deploy Blogs service Prod
   jobs:
@@ -69,6 +111,6 @@ stages:
         azureSubscription: 'Visual Studio Premium with MSDN (a8c29995-b368-4d2a-b32a-db619e53639d)'
         containerAppName: $(containerAppName)
         resourceGroup: $(resourceGroup)
-        imageToDeploy: '$(containerRegistry)/$(imageRepository):$(Build.BuildNumber)'
+        imageToDeploy: '$(containerRegistry)/$(imageRepository):$(version.informational)'
         targetPort: '8080'
 ...

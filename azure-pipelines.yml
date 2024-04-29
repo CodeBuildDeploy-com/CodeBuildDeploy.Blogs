@@ -8,13 +8,12 @@ resources:
 - repo: self
 
 variables:
-  ARM_Service_Connection: codebuilddeploy-terraform
-
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
   isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')]
 
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'c3dcf114-3b01-4424-bee8-4c608be4829b'
+  ARM_Service_Connection: codebuilddeploy-terraform
+  dockerRegistry_Service_Connection: 'codebuilddeploy-acr'
   imageRepository: 'code-build-deploy-blogs'
   containerRegistry: 'codebuilddeploy.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/src/CodeBuildDeploy.Blogs/Dockerfile'
@@ -73,7 +72,7 @@ stages:
       displayName: Docker Build
       inputs:
         command: build
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistry_Service_Connection)
         repository: $(imageRepository)
         tags: |
           latest
@@ -86,7 +85,7 @@ stages:
       displayName: Docker Push
       inputs:
         command: push
-        containerRegistry: $(dockerRegistryServiceConnection)
+        containerRegistry: $(dockerRegistry_Service_Connection)
         repository: $(imageRepository)
         tags: |
           latest

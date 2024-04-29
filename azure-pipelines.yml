@@ -8,6 +8,8 @@ resources:
 - repo: self
 
 variables:
+  ARM_Service_Connection: codebuilddeploy-terraform
+
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
   isRelease: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')]
 
@@ -108,7 +110,7 @@ stages:
     - task: AzureContainerApps@1
       displayName: 'Azure Container App Deploy: codebuilddeploy'
       inputs:
-        azureSubscription: 'Visual Studio Premium with MSDN (a8c29995-b368-4d2a-b32a-db619e53639d)'
+        azureSubscription: '$(ARM_Service_Connection)'
         containerAppName: $(containerAppName)
         resourceGroup: $(resourceGroup)
         imageToDeploy: '$(containerRegistry)/$(imageRepository):$(version.informational)'

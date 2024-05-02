@@ -1,0 +1,121 @@
+trigger:
+  branches:
+    include:
+    - refs/heads/main
+    - refs/heads/release/*
+    - refs/heads/feature/*
+  batch: True
+
+resources:
+- repo: self
+
+variables:
+# Service Connections
+- name: ARM_Service_Connection_Prod
+  value: codebuilddeploy-terraform
+# Docker
+- name: dockerRegistry_Service_Connection
+  value: 'codebuilddeploy-acr'
+- name: imageRepository
+  value: 'code-build-deploy-blogs'
+- name: containerRegistry
+  value: 'codebuilddeploy.azurecr.io'
+- name: dockerfilePath
+  value: '$(Build.SourcesDirectory)/src/CodeBuildDeploy.Blogs/Dockerfile'
+- name: resourceGroup
+  value: 'codebuilddeploy-rg'
+- name: containerAppName
+  value: 'codebuilddeploy-blogs'
+
+# Branch Variables
+- name: isMain
+  value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+- name: isRelease
+  value: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')]
+
+# Agent VM image name
+- name: vmImageName
+  value: 'ubuntu-latest'
+
+# Versioning
+- template: versioning-variables.yml
+
+name: $[variables['Build.Number']]
+
+stages:
+- stage: Build
+  displayName: Build and push Blogs service
+  jobs:
+  - job: Build
+    displayName: Docker Build and Deploy Blogs service
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - checkout: self
+      displayName: 'Checkout Blogs Repo'
+      persistCredentials: true
+
+    - bash: |
+        echo "isMain = $(isMain)"
+        echo "isRelease = $(isRelease)"
+        echo "SourceVersion = $(Build.SourceVersion)"
+        echo "SourceVersion.Short = $(Build.SourceVersion.Short)"
+        echo "Build Number = $(Build.Number)"
+        echo "Version Assembly = $(Version.Assembly)"
+        echo "Version File = $(Version.File)"
+        echo "Version Informational = $(Version.Informational)"
+        echo "Version Major = $(Version.Major)"
+        echo "Version Minor = $(Version.Minor)"
+        echo "Version Patch = $(Version.Patch)"
+      displayName: Output Version
+
+    - task: NuGetAuthenticate@1
+      displayName: 'Authenticate to NuGet'
+
+    - task: Docker@2
+      displayName: Docker Build
+      inputs:
+        command: build
+        containerRegistry: $(dockerRegistry_Service_Connection)
+        repository: $(imageRepository)
+        tags: |
+          latest
+          $(Build.Number)
+        Dockerfile: $(dockerfilePath)
+        buildContext: .
+        arguments: '--build-arg FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN) --build-arg VERSION=$(Build.Number) --build-arg ASSEMBLY_VERSION=$(Version.Assembly) --build-arg FILE_VERSION=$(Version.File) --build-arg INFORMATIONAL_VERSION=$(Version.Informational) --build-arg PACKAGE_VERSION=$(Build.Number)'
+
+    - task: Docker@2
+      displayName: Docker Push
+      inputs:
+        command: push
+        containerRegistry: $(dockerRegistry_Service_Connection)
+        repository: $(imageRepository)
+        tags: |
+          latest
+          $(Build.Number)
+
+    - script: |
+        git tag $(Build.Number)
+        git push origin $(Build.Number)
+      workingDirectory: $(Build.SourcesDirectory)
+      condition: and(or(eq(variables['Build.SourceBranchName'], 'main'), startsWith(variables['Build.SourceBranchName'], 'release')), succeeded())
+      displayName: Tag Version in Git
+
+- stage: DeployProd
+  displayName: Deploy Blogs service Prod
+  jobs:
+  - job: DeployProd
+    displayName: Deploy Blogs service Prod
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: AzureContainerApps@1
+      displayName: 'Azure Container App Deploy: codebuilddeploy'
+      inputs:
+        azureSubscription: '$(ARM_Service_Connection_Prod)'
+        containerAppName: $(containerAppName)
+        resourceGroup: $(resourceGroup)
+        imageToDeploy: '$(containerRegistry)/$(imageRepository):$(Build.Number)'
+        targetPort: '8080'
+...

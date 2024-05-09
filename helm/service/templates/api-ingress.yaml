@@ -1,0 +1,31 @@
+{{ $env := .Values.env.name | required "env.name is required" }}
+{{ $envShort := .Values.env.shortName | required "env.shortName is required" }}
+{{ $serviceName := "codebuilddeploy-blogs" }}
+{{ $instanceName := printf "%s-%s" $env $serviceName }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    appgw.ingress.kubernetes.io/backend-path-prefix: /
+    appgw.ingress.kubernetes.io/health-probe-path: /v1/healthcheck
+  name: {{ $instanceName }}
+spec:
+  rules:
+    - host: {{ $env }}-api.codebuilddeploy.com
+      http:
+        paths:
+          - path: /blogs/*
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $instanceName }}
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - {{ $env }}-api.codebuilddeploy.com
+      secretName: appgw-tls-secret
+status:
+  loadBalancer: {}

@@ -19,11 +19,13 @@ variables:
 - name: dockerRegistry_Service_Connection
   value: 'codebuilddeploy-acr'
 - name: imageRepository
-  value: 'code-build-deploy-blogs'
+  value: 'codebuilddeploy-blogs'
 - name: containerRegistry
   value: 'codebuilddeploy.azurecr.io'
 - name: dockerfilePath
   value: '$(Build.SourcesDirectory)/src/CodeBuildDeploy.Blogs/Dockerfile'
+- name: helmChartName
+  value: 'codebuilddeploy-blogs'
 - name: resourceGroup
   value: 'codebuilddeploy-rg'
 - name: containerAppName
@@ -84,6 +86,23 @@ stages:
         buildContext: .
         arguments: '--build-arg FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN) --build-arg VERSION=$(Build.Number) --build-arg ASSEMBLY_VERSION=$(Version.Assembly) --build-arg FILE_VERSION=$(Version.File) --build-arg INFORMATIONAL_VERSION=$(Version.Informational) --build-arg PACKAGE_VERSION=$(Build.Number)'
 
+    - task: PowerShell@2
+      displayName: Helm Set Image Versions
+      env:
+        API_IMAGE: $(containerRegistry)/$(imageRepository):$(Build.Number)
+      inputs:
+        targetType: inline
+        script: |
+          sed -ri -e "s#image: \{\{ required `"Populated by build`" null \}\}#image: ${env:API_IMAGE}#" helm/service/templates/api-deployment.yaml
+    
+    - task: HelmDeploy@0
+      displayName: Helm Package
+      inputs:
+        command: package
+        chartPath: helm/service
+        destination: $(Build.ArtifactStagingDirectory)/helm
+        chartVersion: $(Build.Number)
+
     - ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
       - task: Docker@2
         displayName: Docker Push
@@ -94,7 +113,25 @@ stages:
           tags: |
             latest
             $(Build.Number)
-          
+
+      - task: AzureCLI@2
+        displayName: ACR Login
+        inputs:
+          azureSubscription: '$(ARM_Service_Connection_Prod)'
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+            az acr login --name $(containerRegistry)
+
+      - task: PowerShell@2
+        displayName: Push Helm Chart
+        env:
+          CHART: $(Build.ArtifactStagingDirectory)/helm/$(helmChartName)-$(Build.Number).tgz
+        inputs:
+          targetType: inline
+          script: |
+            helm push ${env:CHART} oci://$(containerRegistry)/helm
+
       - script: |
           git tag $(Build.Number)
           git push origin $(Build.Number)

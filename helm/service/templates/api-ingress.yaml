@@ -13,19 +13,26 @@ metadata:
   name: {{ $instanceName }}
 spec:
   rules:
-    - host: {{ $env }}-api.codebuilddeploy.com
+    - host: {{ $env }}.codebuilddeploy.co.uk
       http:
         paths:
-          - path: /blogs/*
+          - path: /blogs
             pathType: Prefix
             backend:
               service:
                 name: {{ $instanceName }}
                 port:
                   number: 80
-  tls:
-    - hosts:
-        - {{ $env }}-api.codebuilddeploy.com
-      secretName: appgw-tls-secret
+    - host: {{ $env }}.codebuilddeploy.com
+      http:
+        paths:
+          - path: /blogs
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ $instanceName }}
+                port:
+                  number: 80
+
 status:
   loadBalancer: {}

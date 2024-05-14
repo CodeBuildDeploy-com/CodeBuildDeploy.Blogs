@@ -13,7 +13,7 @@ metadata:
   name: {{ $instanceName }}
 spec:
   rules:
-    - host: {{ $env }}-api.codebuilddeploy.com
+    - host: {{ $env }}.codebuilddeploy.com
       http:
         paths:
           - path: /blogs/*
@@ -25,7 +25,7 @@ spec:
                   number: 80
   tls:
     - hosts:
-        - {{ $env }}-api.codebuilddeploy.com
+        - {{ $env }}.codebuilddeploy.com
       secretName: appgw-tls-secret
 status:
   loadBalancer: {}

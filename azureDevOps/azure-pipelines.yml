@@ -134,19 +134,40 @@ stages:
         workingDirectory: $(Build.SourcesDirectory)
         displayName: Tag Version in Git
 
-- ${{ if eq(variables['deploy.prod'], 'true') }}:
-  - stage: DeployProd
-    displayName: Deploy Blogs service Prod
+- ${{ if eq(variables['deploy.dev'], 'true') }}:
+  - stage: DeployDev
+    dependsOn:
+      - Build
     jobs:
-    - job: DeployProd
+      - template: app-deployment.yml
+        parameters:
+          azureDevOpsEnvironment: 'NonProd-Dev'
+          azureSubscription: '$(Azure.Subscription.NonProd)'
+          acrRepositoryConnect: '$(Acr.Repository.Connect)'
+          containerRegistry: '$(Acr.Repository.Name).azurecr.io'
+          platformEnv: 'nonprod'
+          appEnv: 'dev'
+          serviceNameKebabCase: '$(Service.Name.KebabCase)'
+          serviceVersion: '$(Build.Number)'
+
+  - ${{ if eq(variables['deploy.prod'], 'true') }}:
+    - stage: DeployProd
       displayName: Deploy Blogs service Prod
-      steps:
-      - task: AzureContainerApps@1
-        displayName: 'Azure Container App Deploy: codebuilddeploy'
-        inputs:
-          azureSubscription: '$(Azure.Subscription.Prod)'
-          containerAppName: 'codebuilddeploy-blogs'
-          resourceGroup: 'codebuilddeploy-rg'
-          imageToDeploy: '$(Acr.Repository.Name).azurecr.io/$(Acr.Repository.Image):$(Build.Number)'
-          targetPort: '8080'
-...
+      dependsOn:
+      - DeployDev
+      jobs:
+      - deployment: DeployProd
+        displayName: Deploy Blogs service Prod
+        environment: Prod-Live
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - task: AzureContainerApps@1
+                displayName: 'Azure Container App Deploy: codebuilddeploy'
+                inputs:
+                  azureSubscription: '$(Azure.Subscription.Prod)'
+                  containerAppName: 'codebuilddeploy-blogs'
+                  resourceGroup: 'codebuilddeploy-rg'
+                  imageToDeploy: '$(Acr.Repository.Name).azurecr.io/$(Acr.Repository.Image):$(Build.Number)'
+                  targetPort: '8080'

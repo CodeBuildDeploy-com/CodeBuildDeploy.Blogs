@@ -31,7 +31,7 @@ spec:
             - name: ConnectionStrings__BlogConnection
               valueFrom:
                 secretKeyRef:
-                  name: {{ $env }}-codebuilddeploy-secret
+                  name: cbd-{{ $env }}-blogs-secret
                   key: ConnectionStrings__BlogConnection
 
             - name: ServiceIdentifiers__OwnerId
@@ -51,4 +51,4 @@ spec:
               memory: {{ .Values.resources.api.memory }}
 
       imagePullSecrets:
-        - name: registry-secret-{{ $env }}
+        - name: cbd-pull-secret

@@ -51,4 +51,4 @@ spec:
               memory: {{ .Values.resources.api.memory }}
 
       imagePullSecrets:
-        - name: registry-secret-{{ $env }}
+        - name: cbd-pull-secret

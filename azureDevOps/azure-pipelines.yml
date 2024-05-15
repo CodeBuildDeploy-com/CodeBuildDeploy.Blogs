@@ -8,37 +8,37 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+parameters:
+  - name: deployDev
+    displayName: Deploy to Dev
+    type: boolean
+    default: false
+
+  - name: deployQA
+    displayName: Deploy to QA (must Deploy to Dev too)
+    type: boolean
+    default: false
+
 resources:
 - repo: self
 
 variables:
-# Service Connections
-- name: ARM_Service_Connection_Prod
-  value: codebuilddeploy-terraform
-# Docker
-- name: dockerRegistry_Service_Connection
-  value: 'codebuilddeploy-acr'
-- name: imageRepository
-  value: 'code-build-deploy-blogs'
-- name: containerRegistry
-  value: 'codebuilddeploy.azurecr.io'
-- name: dockerfilePath
-  value: '$(Build.SourcesDirectory)/src/CodeBuildDeploy.Blogs/Dockerfile'
-- name: resourceGroup
-  value: 'codebuilddeploy-rg'
-- name: containerAppName
-  value: 'codebuilddeploy-blogs'
+- name: Service.Name.KebabCase
+  value: "codebuilddeploy-blogs"
 
-# Branch Variables
-- name: isMain
-  value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
-- name: isRelease
-  value: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/release/')]
-- name: isPullRequest
-  value: $[eq(variables['Build.Reason'], 'PullRequest')]
+- template: variables-infrastructure.yml
+  parameters:
+    serviceNameKebabCase: ${{ variables['Service.Name.KebabCase'] }}
+
+- template: variables-build.yml
+  parameters:
+    deployDev: ${{ parameters.deployDev }}
+    deployQA: ${{ parameters.deployQA }}
 
 # Versioning
-- template: versioning-variables.yml
+- template: variables-versioning.yml
+  parameters:
+    buildTypeRelease: ${{ variables['build.type.release'] }}
 
 name: $[variables['Build.Number']]
 
@@ -54,9 +54,7 @@ stages:
       persistCredentials: true
 
     - bash: |
-        echo "isMain = $(isMain)"
-        echo "isRelease = $(isRelease)"
-        echo "isPullRequest = $(isPullRequest)"
+        echo "build.type.release = $(build.type.release)"
         echo "SourceVersion = $(Build.SourceVersion)"
         echo "SourceVersion.Short = $(Build.SourceVersion.Short)"
         echo "Build Number = $(Build.Number)"
@@ -75,45 +73,104 @@ stages:
       displayName: Docker Build
       inputs:
         command: build
-        containerRegistry: $(dockerRegistry_Service_Connection)
-        repository: $(imageRepository)
+        containerRegistry: $(Acr.Repository.Connect)
+        repository: $(Acr.Repository.Image)
         tags: |
           latest
           $(Build.Number)
-        Dockerfile: $(dockerfilePath)
+        Dockerfile: '$(Build.SourcesDirectory)/src/CodeBuildDeploy.Blogs/Dockerfile'
         buildContext: .
         arguments: '--build-arg FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN) --build-arg VERSION=$(Build.Number) --build-arg ASSEMBLY_VERSION=$(Version.Assembly) --build-arg FILE_VERSION=$(Version.File) --build-arg INFORMATIONAL_VERSION=$(Version.Informational) --build-arg PACKAGE_VERSION=$(Build.Number)'
+
+    - task: PowerShell@2
+      displayName: Helm Set Image Versions
+      env:
+        API_IMAGE: $(Acr.Repository.Name).azurecr.io/$(Acr.Repository.Image):$(Build.Number)
+      inputs:
+        targetType: inline
+        script: |
+          sed -ri -e "s#image: \{\{ required `"Populated by build`" null \}\}#image: ${env:API_IMAGE}#" helm/service/templates/api-deployment.yaml
+    
+    - task: HelmDeploy@0
+      displayName: Helm Package
+      inputs:
+        command: package
+        chartPath: helm/service
+        destination: $(Build.ArtifactStagingDirectory)/helm
+        chartVersion: $(Build.Number)
 
     - ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
       - task: Docker@2
         displayName: Docker Push
         inputs:
           command: push
-          containerRegistry: $(dockerRegistry_Service_Connection)
-          repository: $(imageRepository)
+          containerRegistry: $(Acr.Repository.Connect)
+          repository: $(Acr.Repository.Image)
           tags: |
             latest
             $(Build.Number)
-          
+
+      - task: AzureCLI@2
+        displayName: ACR Login
+        inputs:
+          azureSubscription: '$(Azure.Subscription.Prod)'
+          scriptType: bash
+          scriptLocation: inlineScript
+          inlineScript: |
+            az acr login --name $(Acr.Repository.Name).azurecr.io
+
+      - task: PowerShell@2
+        displayName: Push Helm Chart
+        env:
+          CHART: $(Build.ArtifactStagingDirectory)/helm/$(Service.Name.KebabCase)-$(Build.Number).tgz
+        inputs:
+          targetType: inline
+          script: |
+            helm push ${env:CHART} $(Helm.Chart.BaseUrl)
+
       - script: |
           git tag $(Build.Number)
           git push origin $(Build.Number)
         workingDirectory: $(Build.SourcesDirectory)
         displayName: Tag Version in Git
 
-- ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
-  - stage: DeployProd
-    displayName: Deploy Blogs service Prod
+- ${{ if eq(variables['deploy.dev'], 'true') }}:
+  - stage: DeployDev
+    displayName: Deploy NonProd-Dev
+    dependsOn:
+      - Build
+    variables:
+      - group: CodeBuildDeploy-NonProd-Dev
     jobs:
-    - job: DeployProd
-      displayName: Deploy Blogs service Prod
-      steps:
-      - task: AzureContainerApps@1
-        displayName: 'Azure Container App Deploy: codebuilddeploy'
-        inputs:
-          azureSubscription: '$(ARM_Service_Connection_Prod)'
-          containerAppName: $(containerAppName)
-          resourceGroup: $(resourceGroup)
-          imageToDeploy: '$(containerRegistry)/$(imageRepository):$(Build.Number)'
-          targetPort: '8080'
-...
+      - template: app-deployment.yml
+        parameters:
+          azureDevOpsEnvironment: 'NonProd-Dev'
+          azureSubscription: '$(Azure.Subscription.NonProd)'
+          acrRepositoryConnect: '$(Acr.Repository.Connect)'
+          containerRegistry: '$(Acr.Repository.Name).azurecr.io'
+          platformEnv: 'nonprod'
+          appEnv: 'dev'
+          serviceNameKebabCase: '$(Service.Name.KebabCase)'
+          serviceVersion: '$(Build.Number)'
+
+  - ${{ if eq(variables['deploy.prod'], 'true') }}:
+    - stage: DeployProd
+      displayName: Deploy Prod-Live
+      dependsOn:
+      - DeployDev
+      jobs:
+      - deployment: DeployProd
+        displayName: Deploy Blogs service Prod
+        environment: Prod-Live
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - task: AzureContainerApps@1
+                displayName: 'Azure Container App Deploy: codebuilddeploy'
+                inputs:
+                  azureSubscription: '$(Azure.Subscription.Prod)'
+                  containerAppName: 'codebuilddeploy-blogs'
+                  resourceGroup: 'codebuilddeploy-rg'
+                  imageToDeploy: '$(Acr.Repository.Name).azurecr.io/$(Acr.Repository.Image):$(Build.Number)'
+                  targetPort: '8080'

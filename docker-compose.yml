@@ -1,13 +1,13 @@
-name: code-build-deploy-blogs
+name: codebuilddeploy-blogs
 
 networks:
   development:
-    name: code-build-deploy
+    name: codebuilddeploy
     driver: bridge
 
 services:
-  code-build-deploy-blogs:
-    image: codebuilddeploy.azurecr.io/code-build-deploy-blogs:latest
+  codebuilddeploy-blogs:
+    image: codebuilddeploy.azurecr.io/codebuilddeploy-blogs:latest
     build:
       context: .
       dockerfile: ./src/CodeBuildDeploy.Blogs/Dockerfile
@@ -25,5 +25,5 @@ services:
       - 5003:5003
     networks:
       - development
-    container_name: code-build-deploy-blogs
-    hostname: code-build-deploy-blogs
+    container_name: codebuilddeploy-blogs
+    hostname: codebuilddeploy-blogs

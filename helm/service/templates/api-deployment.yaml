@@ -1,0 +1,54 @@
+{{ $env := .Values.env.name | required "env.name is required" }}
+{{ $envShort := .Values.env.shortName | required "env.shortName is required" }}
+{{ $serviceName := "codebuilddeploy-blogs" }}
+{{ $instanceName := printf "%s-%s" $env $serviceName }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ $instanceName }}
+  name: {{ $instanceName }}
+spec:
+  replicas: {{ .Values.replicas.api.min }}
+  selector:
+    matchLabels:
+      app: {{ $instanceName }}
+  template:
+    metadata:
+      labels:
+        app: {{ $instanceName }}
+    spec:
+      containers:
+        - name: {{ $serviceName }}
+
+          image: {{ required "Populated by build" null }}
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - containerPort: 8080
+
+          env:
+            - name: ConnectionStrings__BlogConnection
+              valueFrom:
+                secretKeyRef:
+                  name: cbd-{{ $env }}-blogs-secret
+                  key: ConnectionStrings__BlogConnection
+
+            - name: ServiceIdentifiers__OwnerId
+              value: "codebuilddeploy"
+            - name: ServiceIdentifiers__EnvironmentId
+              value: "{{ $env }}"
+
+            - name: ASPNETCORE_ENVIRONMENT
+              value: {{ $env }}
+
+          resources:
+            limits:
+              cpu: {{ .Values.resources.api.cpu.limit }}
+              memory: {{ .Values.resources.api.memory }}
+            requests:
+              cpu: {{ .Values.resources.api.cpu.request }}
+              memory: {{ .Values.resources.api.memory }}
+
+      imagePullSecrets:
+        - name: cbd-pull-secret

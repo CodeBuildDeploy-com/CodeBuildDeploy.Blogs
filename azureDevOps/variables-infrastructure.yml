@@ -1,0 +1,13 @@
+parameters:
+  - name: serviceNameKebabCase
+
+variables:
+  Azure.Subscription.NonProd: "codebuilddeploy-terraform-non-prod"
+  Azure.Subscription.Prod: "codebuilddeploy-terraform"
+
+  Acr.Repository.Connect: "codebuilddeploy-acr"
+  Acr.Repository.Name: "codebuilddeploy"
+  Acr.Repository.Image: 'codebuilddeploy-blogs'
+  
+  Helm.Chart.BaseUrl: oci://${{ variables['Acr.Repository.Name'] }}.azurecr.io/helm
+  Helm.Chart.Url: ${{ variables['Helm.Chart.BaseUrl'] }}/${{ parameters.serviceNameKebabCase }}

@@ -1,0 +1,52 @@
+{{ $env := .Values.env.name | required "env.name is required" }}
+{{ $envShort := .Values.env.shortName | required "env.shortName is required" }}
+{{ $serviceName := "codebuilddeploy-blogs" }}
+{{ $instanceName := printf "%s-%s" $env $serviceName }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    appgw.ingress.kubernetes.io/health-probe-path: /v1/healthcheck
+    appgw.ingress.kubernetes.io/appgw-ssl-certificate: "cbd-appgateway-ssl-cert"
+  name: {{ $instanceName }}
+spec:
+  rules:
+  - host: {{ $env }}.codebuilddeploy.co.uk
+    http:
+      paths:
+      - path: /api/blog
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ $instanceName }}
+            port:
+              number: 80
+      - path: /swagger/blog
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ $instanceName }}
+            port:
+              number: 80
+  - host: {{ $env }}.codebuilddeploy.com
+    http:
+      paths:
+      - path: /api/blog
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ $instanceName }}
+            port:
+              number: 80
+      - path: /swagger/blog
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ $instanceName }}
+            port:
+              number: 80
+
+status:
+  loadBalancer: {}

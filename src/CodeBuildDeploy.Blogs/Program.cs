@@ -51,14 +51,20 @@ static async Task ConfigureLoggingAsync(WebApplicationBuilder builder, Reloadabl
 
 static async Task ConfigureAppAsync(WebApplication app)
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwagger(options => { options.RouteTemplate = "swagger/blog/{documentName}/spec.json"; })
+       .UseSwaggerUI(c =>
+        {
+            c.RoutePrefix = "swagger/blog";
+            c.SwaggerEndpoint("v1/spec.json", "Code Build Deploy Blogs API v1");
+        });
 
     app.UseHttpsRedirection();
 
     app.UseAuthorization();
 
     app.MapControllers();
+
+    app.UseHealthChecks($"/v1/healthcheck");
 
     await Task.CompletedTask;
 }

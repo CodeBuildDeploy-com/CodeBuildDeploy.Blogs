@@ -7,37 +7,30 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-parameters:
-  - name: deployDev
-    displayName: Deploy to Dev
-    type: boolean
-    default: false
-
-  - name: deployQA
-    displayName: Deploy to QA (must Deploy to Dev too)
-    type: boolean
-    default: false
-
 resources:
-- repo: self
+  repositories:
+  - repository: self
+  - repository: platform
+    type: git
+    name: 'CodeBuildDeploy.Platform'
+  - repository: appplatform
+    type: git
+    name: 'CodeBuildDeploy.Platform.App'
 
 variables:
 - name: Service.Name.KebabCase
   value: "codebuilddeploy-blogs"
 
-- template: variables-infrastructure.yml
-  parameters:
-    serviceNameKebabCase: ${{ variables['Service.Name.KebabCase'] }}
+- template: azureDevOps/variables-infrastructure.yml@platform
+- template: azureDevOps/variables-infrastructure.yml@appplatform
 
-- template: variables-build.yml
-  parameters:
-    deployDev: ${{ parameters.deployDev }}
-    deployQA: ${{ parameters.deployQA }}
+- template: azureDevOps/variables-build.yml@platform
 
-# Versioning
-- template: variables-versioning.yml
+- template: azureDevOps/variables-versioning.yml@platform
   parameters:
     buildTypeRelease: ${{ variables['build.type.release'] }}
+    majorVersion: 1
+    minorVersion: 1
 
 name: $[variables['Build.Number']]
 
@@ -73,7 +66,7 @@ stages:
       inputs:
         command: build
         containerRegistry: $(Acr.Repository.Connect)
-        repository: $(Acr.Repository.Image)
+        repository: $(Service.Name.KebabCase)
         tags: |
           latest
           $(Build.Number)
@@ -84,7 +77,7 @@ stages:
     - task: PowerShell@2
       displayName: Helm Set Image Versions
       env:
-        API_IMAGE: $(Acr.Repository.Name).azurecr.io/$(Acr.Repository.Image):$(Build.Number)
+        API_IMAGE: $(Acr.Repository.Name).azurecr.io/$(Service.Name.KebabCase):$(Build.Number)
       inputs:
         targetType: inline
         script: |
@@ -104,7 +97,7 @@ stages:
         inputs:
           command: push
           containerRegistry: $(Acr.Repository.Connect)
-          repository: $(Acr.Repository.Image)
+          repository: $(Service.Name.KebabCase)
           tags: |
             latest
             $(Build.Number)
@@ -132,44 +125,3 @@ stages:
           git push origin $(Build.Number)
         workingDirectory: $(Build.SourcesDirectory)
         displayName: Tag Version in Git
-
-- ${{ if eq(variables['deploy.dev'], 'true') }}:
-  - stage: DeployDev
-    displayName: Deploy NonProd-Dev
-    dependsOn:
-      - Build
-    variables:
-      - group: CodeBuildDeploy-NonProd-Dev
-    jobs:
-      - template: app-deployment.yml
-        parameters:
-          azureDevOpsEnvironment: 'NonProd-Dev'
-          azureSubscription: '$(Azure.Subscription.NonProd)'
-          acrRepositoryConnect: '$(Acr.Repository.Connect)'
-          containerRegistry: '$(Acr.Repository.Name).azurecr.io'
-          platformEnv: 'nonprod'
-          appEnv: 'dev'
-          serviceNameKebabCase: '$(Service.Name.KebabCase)'
-          serviceVersion: '$(Build.Number)'
-
-  - ${{ if eq(variables['deploy.prod'], 'true') }}:
-    - stage: DeployProd
-      displayName: Deploy Prod-Live
-      dependsOn:
-      - DeployDev
-      jobs:
-      - deployment: DeployProd
-        displayName: Deploy Blogs service Prod
-        environment: Prod-Live
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-              - task: AzureContainerApps@1
-                displayName: 'Azure Container App Deploy: codebuilddeploy'
-                inputs:
-                  azureSubscription: '$(Azure.Subscription.Prod)'
-                  containerAppName: 'codebuilddeploy-blogs'
-                  resourceGroup: 'codebuilddeploy-rg'
-                  imageToDeploy: '$(Acr.Repository.Name).azurecr.io/$(Acr.Repository.Image):$(Build.Number)'
-                  targetPort: '8080'

@@ -31,7 +31,7 @@ spec:
             - name: ConnectionStrings__BlogConnection
               valueFrom:
                 secretKeyRef:
-                  name: cbd-{{ $env }}-blogs-secret
+                  name: cbd-{{ $env }}-secret
                   key: ConnectionStrings__BlogConnection
 
             - name: ServiceIdentifiers__OwnerId

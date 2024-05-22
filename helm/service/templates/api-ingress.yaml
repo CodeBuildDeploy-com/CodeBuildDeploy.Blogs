@@ -6,17 +6,15 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    kubernetes.io/ingress.class: azure/application-gateway
-    appgw.ingress.kubernetes.io/ssl-redirect: "true"
-    appgw.ingress.kubernetes.io/health-probe-path: /v1/healthcheck
-    appgw.ingress.kubernetes.io/appgw-ssl-certificate: "cbd-appgateway-ssl-cert"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
   name: {{ $instanceName }}
 spec:
+  ingressClassName: nginx
   rules:
   - host: {{ $env }}.codebuilddeploy.co.uk
     http:
       paths:
-      - path: /api/blog
+      - path: /api/Blog
         pathType: Prefix
         backend:
           service:
@@ -33,7 +31,7 @@ spec:
   - host: {{ $env }}.codebuilddeploy.com
     http:
       paths:
-      - path: /api/blog
+      - path: /api/Blog
         pathType: Prefix
         backend:
           service:
@@ -47,6 +45,11 @@ spec:
             name: {{ $instanceName }}
             port:
               number: 80
+  tls:
+    - hosts:
+        - {{ $env }}.codebuilddeploy.co.uk
+        - {{ $env }}.codebuilddeploy.com
+      secretName: cbd-{{ $env }}-ssl-cert
 
 status:
   loadBalancer: {}

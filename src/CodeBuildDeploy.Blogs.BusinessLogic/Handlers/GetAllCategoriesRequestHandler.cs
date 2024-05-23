@@ -5,7 +5,7 @@ using MediatR;
 
 using CodeBuildDeploy.Blogs.BusinessLogic.Requests;
 using CodeBuildDeploy.Blogs.Contract.Dto;
-using CodeBuildDeploy.Blogs.Data.Queries;
+using CodeBuildDeploy.Blogs.DA.Queries;
 
 namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
 {
@@ -13,11 +13,11 @@ namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
     {
         private readonly ILogger<GetAllCategoriesRequestHandler> _logger;
 
-        private readonly IQueryRunner<AllCategoriesQuery, IList<Data.Entities.Category>> _queryRunner;
+        private readonly IQueryRunner<AllCategoriesQuery, IList<DA.Entities.Category>> _queryRunner;
 
         private readonly IMapper _mapper;
 
-        public GetAllCategoriesRequestHandler(IQueryRunner<AllCategoriesQuery, IList<Data.Entities.Category>> queryRunner, IMapper mapper, ILogger<GetAllCategoriesRequestHandler> logger)
+        public GetAllCategoriesRequestHandler(IQueryRunner<AllCategoriesQuery, IList<DA.Entities.Category>> queryRunner, IMapper mapper, ILogger<GetAllCategoriesRequestHandler> logger)
         {
             _queryRunner = queryRunner;
             _mapper = mapper;

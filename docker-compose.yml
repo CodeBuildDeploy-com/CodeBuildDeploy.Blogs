@@ -6,14 +6,29 @@ networks:
     driver: bridge
 
 services:
+  codebuilddeploy-blogs-data:
+    image: codebuilddeploy.azurecr.io/codebuilddeploy-blogs-data:latest
+    build:
+      context: .
+      dockerfile: ./src/CodeBuildDeploy.Blogs.Api/Dockerfile
+      target: finalMigration
+      args:
+        FEED_ACCESSTOKEN: $FEED_ACCESSTOKEN
+    env_file: .env
+    networks:
+      - development
+    container_name: codebuilddeploy-blogs-data
+    hostname: codebuilddeploy-blogs-data
+
   codebuilddeploy-blogs:
     image: codebuilddeploy.azurecr.io/codebuilddeploy-blogs:latest
     build:
       context: .
-      dockerfile: ./src/CodeBuildDeploy.Blogs/Dockerfile
+      dockerfile: ./src/CodeBuildDeploy.Blogs.Api/Dockerfile
       target: final
       args:
         FEED_ACCESSTOKEN: $FEED_ACCESSTOKEN
+    env_file: .env
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: https://+:5003

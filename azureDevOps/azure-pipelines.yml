@@ -97,7 +97,7 @@ stages:
         targetType: inline
         script: |
           sed -ri -e "s#image: \{\{ required `"Populated by build`" null \}\}#image: ${env:API_IMAGE}#" helm/service/templates/api-deployment.yaml
-          sed -ri -e "s#name: \{\{ \$instanceName \}\}-\{\{ required `"name populated by build`" null \}\}#name: \{\{ \$instanceName \}\}-${env:DATA_NAME_VERSION}#" helm/service/templates/data-job.yaml
+          sed -ri -e "s#name: \{\{ instanceName \}\}-\{\{ required `"name populated by build`" null \}\}#name: \{\{ instanceName \}\}-${env:DATA_NAME_VERSION}#" helm/service/templates/data-job.yaml
           sed -ri -e "s#image: \{\{ required `"Populated by build`" null \}\}#image: ${env:DATA_IMAGE}#" helm/service/templates/data-job.yaml
           cat helm/service/templates/data-job.yaml
     

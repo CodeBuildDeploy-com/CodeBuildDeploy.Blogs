@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using MediatR;
 
 using CodeBuildDeploy.Blogs.BusinessLogic.Requests;
-using CodeBuildDeploy.Blogs.Data.Queries;
+using CodeBuildDeploy.Blogs.DA.Queries;
 
 namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
 {

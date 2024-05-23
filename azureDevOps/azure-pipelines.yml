@@ -32,6 +32,9 @@ variables:
     majorVersion: 1
     minorVersion: 1
 
+- name: Service.Name.KebabCase
+  value: $[ replace(variables['Build.Number'],'.','-') ]
+
 name: $[variables['Build.Number']]
 
 stages:
@@ -91,7 +94,7 @@ stages:
       displayName: Helm Set Image Versions
       env:
         API_IMAGE: "$(Acr.Repository.Name).azurecr.io/$(Service.Name.KebabCase):$(Build.Number)"
-        DATA_NAME_VERSION: $[ replace(variables['Build.Number'],'.','-') ]
+        DATA_NAME_VERSION: "$(Service.Name.KebabCase)"
         DATA_IMAGE: "$(Acr.Repository.Name).azurecr.io/$(Service.Name.KebabCase)-data:$(Build.Number)"
       inputs:
         targetType: inline

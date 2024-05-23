@@ -32,6 +32,9 @@ variables:
     majorVersion: 1
     minorVersion: 1
 
+- name: Version.Informational.KebabCase
+  value: $[ replace(variables['Version.Informational'],'.','-') ]
+
 name: $[variables['Build.Number']]
 
 stages:
@@ -62,26 +65,43 @@ stages:
       displayName: 'Authenticate to NuGet'
 
     - task: Docker@2
-      displayName: Docker Build
+      displayName: Build API Image
       inputs:
         command: build
         containerRegistry: $(Acr.Repository.Connect)
-        repository: $(Service.Name.KebabCase)
+        repository: "${{ variables['Service.Name.KebabCase'] }}"
         tags: |
           latest
           $(Build.Number)
-        Dockerfile: '$(Build.SourcesDirectory)/src/CodeBuildDeploy.Blogs/Dockerfile'
+        Dockerfile: '$(Build.SourcesDirectory)/src/CodeBuildDeploy.Blogs.Api/Dockerfile'
         buildContext: .
-        arguments: '--build-arg FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN) --build-arg VERSION=$(Build.Number) --build-arg ASSEMBLY_VERSION=$(Version.Assembly) --build-arg FILE_VERSION=$(Version.File) --build-arg INFORMATIONAL_VERSION=$(Version.Informational) --build-arg PACKAGE_VERSION=$(Build.Number)'
+        arguments: '--target final --build-arg FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN) --build-arg VERSION=$(Build.Number) --build-arg ASSEMBLY_VERSION=$(Version.Assembly) --build-arg FILE_VERSION=$(Version.File) --build-arg INFORMATIONAL_VERSION=$(Version.Informational) --build-arg PACKAGE_VERSION=$(Build.Number)'
+
+    - task: Docker@2
+      displayName: Build Data Image
+      inputs:
+        command: build
+        containerRegistry: $(Acr.Repository.Connect)
+        repository: "${{ variables['Service.Name.KebabCase'] }}-data"
+        tags: |
+          latest
+          $(Build.Number)
+        Dockerfile: '$(Build.SourcesDirectory)/src/CodeBuildDeploy.Blogs.Api/Dockerfile'
+        buildContext: .
+        arguments: '--target finalMigration --build-arg FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN) --build-arg VERSION=$(Build.Number) --build-arg ASSEMBLY_VERSION=$(Version.Assembly) --build-arg FILE_VERSION=$(Version.File) --build-arg INFORMATIONAL_VERSION=$(Version.Informational) --build-arg PACKAGE_VERSION=$(Build.Number)'
 
     - task: PowerShell@2
       displayName: Helm Set Image Versions
       env:
-        API_IMAGE: $(Acr.Repository.Name).azurecr.io/$(Service.Name.KebabCase):$(Build.Number)
+        API_IMAGE: "$(Acr.Repository.Name).azurecr.io/$(Service.Name.KebabCase):$(Build.Number)"
+        DATA_NAME_VERSION: "$(Version.Informational.KebabCase)"
+        DATA_IMAGE: "$(Acr.Repository.Name).azurecr.io/$(Service.Name.KebabCase)-data:$(Build.Number)"
       inputs:
         targetType: inline
         script: |
           sed -ri -e "s#image: \{\{ required `"Populated by build`" null \}\}#image: ${env:API_IMAGE}#" helm/service/templates/api-deployment.yaml
+          sed -ri -e "s/-\{\{ required `"name append populated by build`" null \}\}/-${env:DATA_NAME_VERSION}/" helm/service/templates/data-job.yaml
+          sed -ri -e "s#image: \{\{ required `"Populated by build`" null \}\}#image: ${env:DATA_IMAGE}#" helm/service/templates/data-job.yaml
     
     - task: HelmDeploy@0
       displayName: Helm Package
@@ -93,11 +113,21 @@ stages:
 
     - ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
       - task: Docker@2
-        displayName: Docker Push
+        displayName: Push API Image
         inputs:
           command: push
           containerRegistry: $(Acr.Repository.Connect)
           repository: $(Service.Name.KebabCase)
+          tags: |
+            latest
+            $(Build.Number)
+
+      - task: Docker@2
+        displayName: Push Data Image
+        inputs:
+          command: push
+          containerRegistry: $(Acr.Repository.Connect)
+          repository: "$(Service.Name.KebabCase)-data"
           tags: |
             latest
             $(Build.Number)

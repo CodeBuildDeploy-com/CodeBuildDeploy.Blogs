@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CodeBuildDeploy.Blogs.Data.Entities;
+using CodeBuildDeploy.Blogs.DA.Entities;
 
 namespace CodeBuildDeploy.Blogs.BusinessLogic.Mapping
 {

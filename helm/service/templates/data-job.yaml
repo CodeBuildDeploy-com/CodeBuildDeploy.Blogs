@@ -5,7 +5,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ instanceName }}-{{ required "name populated by build" null }}
+  name: {{ $instanceName }}-{{ required "version cammelcase populated by build" null }}
 spec:
   template:
     spec:

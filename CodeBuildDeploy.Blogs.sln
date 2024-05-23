@@ -15,20 +15,21 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azureDevOps", "azureDevOps", "{18F4D70D-7A1B-4DA1-AA05-E58507100BC3}"
 	ProjectSection(SolutionItems) = preProject
 		azureDevOps\azure-pipelines.yml = azureDevOps\azure-pipelines.yml
-		azureDevOps\versioning-variables.yml = azureDevOps\versioning-variables.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8E1284C1-47DA-405E-9D25-2DCE4BCEAE31}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs", "src\CodeBuildDeploy.Blogs\CodeBuildDeploy.Blogs.csproj", "{C62EF7EE-8FCC-4BA7-BE9A-155F363DD79B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.Data", "src\CodeBuildDeploy.Blogs.Data\CodeBuildDeploy.Blogs.Data.csproj", "{C224F40E-683B-4416-9342-F96D3475F140}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.Api", "src\CodeBuildDeploy.Blogs.Api\CodeBuildDeploy.Blogs.Api.csproj", "{C62EF7EE-8FCC-4BA7-BE9A-155F363DD79B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.Contract", "src\CodeBuildDeploy.Blogs.Contract\CodeBuildDeploy.Blogs.Contract.csproj", "{FFFDE7FC-6A75-41A4-B9A5-54C8E4D12A36}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.BusinessLogic", "src\CodeBuildDeploy.Blogs.BusinessLogic\CodeBuildDeploy.Blogs.BusinessLogic.csproj", "{571F00FC-8268-43A9-B6DB-F6E278D743EF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.Data.EF", "src\CodeBuildDeploy.Blogs.Data.EF\CodeBuildDeploy.Blogs.Data.EF.csproj", "{2627EC71-380C-4F6C-8590-8CA35917682E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.DA.Abstractions", "src\CodeBuildDeploy.Blogs.DA.Abstractions\CodeBuildDeploy.Blogs.DA.Abstractions.csproj", "{C224F40E-683B-4416-9342-F96D3475F140}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.DA.EF", "src\CodeBuildDeploy.Blogs.DA.EF\CodeBuildDeploy.Blogs.DA.EF.csproj", "{2627EC71-380C-4F6C-8590-8CA35917682E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBuildDeploy.Blogs.DA.EF.Deploy", "src\CodeBuildDeploy.Blogs.DA.EF.Deploy\CodeBuildDeploy.Blogs.DA.EF.Deploy.csproj", "{6B452480-EA54-41EF-A0E4-4FDAF1B9918D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,10 +41,6 @@ Global
 		{C62EF7EE-8FCC-4BA7-BE9A-155F363DD79B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C62EF7EE-8FCC-4BA7-BE9A-155F363DD79B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C62EF7EE-8FCC-4BA7-BE9A-155F363DD79B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C224F40E-683B-4416-9342-F96D3475F140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C224F40E-683B-4416-9342-F96D3475F140}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C224F40E-683B-4416-9342-F96D3475F140}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C224F40E-683B-4416-9342-F96D3475F140}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FFFDE7FC-6A75-41A4-B9A5-54C8E4D12A36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FFFDE7FC-6A75-41A4-B9A5-54C8E4D12A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFFDE7FC-6A75-41A4-B9A5-54C8E4D12A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -52,20 +49,29 @@ Global
 		{571F00FC-8268-43A9-B6DB-F6E278D743EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{571F00FC-8268-43A9-B6DB-F6E278D743EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{571F00FC-8268-43A9-B6DB-F6E278D743EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C224F40E-683B-4416-9342-F96D3475F140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C224F40E-683B-4416-9342-F96D3475F140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C224F40E-683B-4416-9342-F96D3475F140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C224F40E-683B-4416-9342-F96D3475F140}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2627EC71-380C-4F6C-8590-8CA35917682E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2627EC71-380C-4F6C-8590-8CA35917682E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2627EC71-380C-4F6C-8590-8CA35917682E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2627EC71-380C-4F6C-8590-8CA35917682E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B452480-EA54-41EF-A0E4-4FDAF1B9918D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B452480-EA54-41EF-A0E4-4FDAF1B9918D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B452480-EA54-41EF-A0E4-4FDAF1B9918D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B452480-EA54-41EF-A0E4-4FDAF1B9918D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C62EF7EE-8FCC-4BA7-BE9A-155F363DD79B} = {8E1284C1-47DA-405E-9D25-2DCE4BCEAE31}
-		{C224F40E-683B-4416-9342-F96D3475F140} = {8E1284C1-47DA-405E-9D25-2DCE4BCEAE31}
 		{FFFDE7FC-6A75-41A4-B9A5-54C8E4D12A36} = {8E1284C1-47DA-405E-9D25-2DCE4BCEAE31}
 		{571F00FC-8268-43A9-B6DB-F6E278D743EF} = {8E1284C1-47DA-405E-9D25-2DCE4BCEAE31}
+		{C224F40E-683B-4416-9342-F96D3475F140} = {8E1284C1-47DA-405E-9D25-2DCE4BCEAE31}
 		{2627EC71-380C-4F6C-8590-8CA35917682E} = {8E1284C1-47DA-405E-9D25-2DCE4BCEAE31}
+		{6B452480-EA54-41EF-A0E4-4FDAF1B9918D} = {8E1284C1-47DA-405E-9D25-2DCE4BCEAE31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {03A80A84-5882-40C2-8105-66B1E6DB99D7}

@@ -5,7 +5,7 @@ using MediatR;
 
 using CodeBuildDeploy.Blogs.BusinessLogic.Requests;
 using CodeBuildDeploy.Blogs.Contract.Dto;
-using CodeBuildDeploy.Blogs.Data.Queries;
+using CodeBuildDeploy.Blogs.DA.Queries;
 
 namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
 {
@@ -13,11 +13,11 @@ namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
     {
         private readonly ILogger<GetPostByUrlSlugRequestHandler> _logger;
 
-        private readonly IQueryRunner<PostByUrlSlugQuery, Data.Entities.Post> _queryRunner;
+        private readonly IQueryRunner<PostByUrlSlugQuery, DA.Entities.Post> _queryRunner;
 
         private readonly IMapper _mapper;
 
-        public GetPostByUrlSlugRequestHandler(IQueryRunner<PostByUrlSlugQuery, Data.Entities.Post> queryRunner, IMapper mapper, ILogger<GetPostByUrlSlugRequestHandler> logger)
+        public GetPostByUrlSlugRequestHandler(IQueryRunner<PostByUrlSlugQuery, DA.Entities.Post> queryRunner, IMapper mapper, ILogger<GetPostByUrlSlugRequestHandler> logger)
         {
             _queryRunner = queryRunner;
             _mapper = mapper;
@@ -32,7 +32,6 @@ namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
 
             return await Task.FromResult(new Post
             {
-                Id = dbPost.Id,
                 UrlSlug = dbPost.UrlSlug,
                 Title = dbPost.Title,
                 ShortDescription = dbPost.ShortDescription,
@@ -43,14 +42,12 @@ namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
                 Modified = dbPost.Modified,
                 Category = new Category
                 {
-                    Id = dbPost.Category.Id,
                     Name = dbPost.Category.Name,
                     Description = dbPost.Category.Description
                 },
                 Tags = dbPost.PostTags.Select(pt =>
                             new Tag
                             {
-                                Id = pt.Tag.Id,
                                 Name = pt.Tag.Name,
                                 Description = pt.Tag.Description
 

@@ -2,10 +2,8 @@
 {
     public class Tag
     {
-        public virtual int Id { get; set; }
+        public string Name { get; set; } = null!;
 
-        public virtual string Name { get; set; } = null!;
-
-        public virtual string Description { get; set; } = null!;
+        public string Description { get; set; } = null!;
     }
 }

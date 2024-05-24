@@ -1,6 +1,6 @@
-﻿namespace CodeBuildDeploy.Blogs.Contract.Dto
+﻿namespace CodeBuildDeploy.Blogs.DA.Entities
 {
-    public class Post
+    public class Post : EntityBase
     {
         public string UrlSlug { get; set; } = null!;
 
@@ -18,8 +18,10 @@
 
         public DateTime? Modified { get; set; }
 
+        public Guid CategoryId { get; set; }
+
         public Category Category { get; set; } = null!;
 
-        public IList<Tag> Tags { get; set; } = new List<Tag>();
+        public IList<PostTag> PostTags { get; set; } = new List<PostTag>();
     }
 }

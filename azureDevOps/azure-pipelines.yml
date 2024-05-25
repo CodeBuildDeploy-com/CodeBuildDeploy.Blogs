@@ -132,7 +132,7 @@ stages:
       - task: AzureCLI@2
         displayName: ACR Login
         inputs:
-          azureSubscription: '$(Azure.Subscription.Prod)'
+          azureSubscription: '$(Azure.Subscription.ProdPremium)'
           scriptType: bash
           scriptLocation: inlineScript
           inlineScript: |

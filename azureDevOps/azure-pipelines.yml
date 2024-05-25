@@ -10,9 +10,9 @@ pool:
 resources:
   repositories:
   - repository: self
-  - repository: platform
+  - repository: subplatform
     type: git
-    name: 'CodeBuildDeploy.Platform'
+    name: 'CodeBuildDeploy.Platform.Subscription'
   - repository: appplatform
     type: git
     name: 'CodeBuildDeploy.Platform.App'
@@ -21,12 +21,12 @@ variables:
 - name: Service.Name.KebabCase
   value: "codebuilddeploy-blogs"
 
-- template: azureDevOps/variables-infrastructure.yml@platform
+- template: azureDevOps/variables-infrastructure.yml@subplatform
 - template: azureDevOps/variables-infrastructure.yml@appplatform
 
-- template: azureDevOps/variables-build.yml@platform
+- template: azureDevOps/variables-build.yml@subplatform
 
-- template: azureDevOps/variables-versioning.yml@platform
+- template: azureDevOps/variables-versioning.yml@subplatform
   parameters:
     buildTypeRelease: ${{ variables['build.type.release'] }}
     majorVersion: 1

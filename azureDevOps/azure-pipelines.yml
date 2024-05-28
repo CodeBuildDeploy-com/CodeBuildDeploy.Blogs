@@ -62,7 +62,7 @@ stages:
       displayName: 'Authenticate to NuGet'
 
     - task: Docker@2
-      displayName: Build API Image
+      displayName: Build App Image
       inputs:
         command: build
         containerRegistry: $(Acr.Repository.Connect)
@@ -90,13 +90,13 @@ stages:
     - task: PowerShell@2
       displayName: Helm Set Image Versions
       env:
-        API_IMAGE: "$(Acr.Repository.Name).azurecr.io/$(Service.Name.KebabCase):$(Build.Number)"
+        APP_IMAGE: "$(Acr.Repository.Name).azurecr.io/$(Service.Name.KebabCase):$(Build.Number)"
         DATA_NAME_VERSION: "$(Version.Informational.Kebab)"
         DATA_IMAGE: "$(Acr.Repository.Name).azurecr.io/$(Service.Name.KebabCase)-data:$(Build.Number)"
       inputs:
         targetType: inline
         script: |
-          sed -ri -e "s#image: \{\{ required `"Populated by build`" null \}\}#image: ${env:API_IMAGE}#" helm/service/templates/api-deployment.yaml
+          sed -ri -e "s#image: \{\{ required `"Populated by build`" null \}\}#image: ${env:APP_IMAGE}#" helm/service/templates/api-deployment.yaml
           sed -ri -e "s/-\{\{ required `"name append populated by build`" null \}\}/-${env:DATA_NAME_VERSION}/" helm/service/templates/data-job.yaml
           sed -ri -e "s#image: \{\{ required `"Populated by build`" null \}\}#image: ${env:DATA_IMAGE}#" helm/service/templates/data-job.yaml
     
@@ -110,7 +110,7 @@ stages:
 
     - ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
       - task: Docker@2
-        displayName: Push API Image
+        displayName: Push App Image
         inputs:
           command: push
           containerRegistry: $(Acr.Repository.Connect)

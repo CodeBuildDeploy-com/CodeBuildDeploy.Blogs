@@ -4,7 +4,7 @@
 
 The Code Build Deploy Blogs Service.
 
-The site is deployed to [Azure Container Apps](https://azure.microsoft.com/en-gb/products/container-apps).
+The api is deployed as a container, into [AKS](https://azure.microsoft.com/en-gb/products/kubernetes-service/).
 
 [![Build Status](https://markpollard.visualstudio.com/CodeBuildDeploy/_apis/build/status%2FCodeBuildDeploy.Blogs?branchName=main)](https://markpollard.visualstudio.com/CodeBuildDeploy/_build/latest?definitionId=6&branchName=main)
 
@@ -19,7 +19,7 @@ dotnet build
 ## Publishing
 
 ```bash
-dotnet publish ./CodeBuildDeploy.Blogs.Api/CodeBuildDeploy.Blogs.Api.csproj --framework net8.0 --self-contained:false --no-restore -o ./publish/net8.0
+dotnet publish ./CodeBuildDeploy.Blogs.Api/CodeBuildDeploy.Blogs.Api.csproj --framework net8.0 --self-contained:false --no-restore -o ./publish
 ```
 
 ## Running

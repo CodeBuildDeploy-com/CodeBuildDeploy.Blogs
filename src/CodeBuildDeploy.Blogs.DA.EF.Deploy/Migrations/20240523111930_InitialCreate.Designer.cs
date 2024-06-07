@@ -34,8 +34,8 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -49,20 +49,14 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d4d99022-04a5-43ed-982e-b4741adc6478"),
-                            Description = "General info topics",
-                            Name = "General"
-                        },
-                        new
-                        {
                             Id = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
-                            Description = "Blogs on topics like Continuous Delivery, DevOps Cultures, Automation, Continuous Improvement, Software Engineering Practices and all things Software Delivery",
+                            Description = "Articles talking about how we like to deliver software here at CodeBuildDeploy, using the CodeBuildDeploy software as an example / POC delivery project. Includes key areas and concepts such as Continuous Delivery, DevOps Cultures, Automation, Continuous Improvement, Software Engineering Practices and all things Software Delivery.",
                             Name = "Software Delivery"
                         },
                         new
                         {
                             Id = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
-                            Description = "Blogs on setting up my workstation",
+                            Description = "An engineers workstation setup is an imperative part of their capability to deliver software effectively, comfortably and productively. This section details the setups of the CodeBuildDeploy family. It includes articles on how to setup tools that we find useful.",
                             Name = "Workstation Setup"
                         });
                 });
@@ -83,8 +77,8 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("datetime2");
@@ -129,19 +123,6 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                             ShortDescription = "Libraries you may like",
                             Title = "Libraries",
                             UrlSlug = "Libraries"
-                        },
-                        new
-                        {
-                            Id = new Guid("2d5076c0-dee7-4dbd-b355-320f28b8f3ce"),
-                            CategoryId = new Guid("d4d99022-04a5-43ed-982e-b4741adc6478"),
-                            Content = "Links",
-                            Description = "Links to External Articles / Resources.",
-                            Modified = new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostedOn = new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Published = true,
-                            ShortDescription = "Useful links and resources",
-                            Title = "Links",
-                            UrlSlug = "Links"
                         },
                         new
                         {
@@ -287,8 +268,8 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()

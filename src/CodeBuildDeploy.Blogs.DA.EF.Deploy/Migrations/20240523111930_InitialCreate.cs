@@ -23,7 +23,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -37,7 +37,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,7 +53,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                     UrlSlug = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ShortDescription = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Published = table.Column<bool>(type: "bit", nullable: false),
                     PostedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -105,9 +105,8 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                 columns: new[] { "Id", "Description", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"), "Blogs on topics like Continuous Delivery, DevOps Cultures, Automation, Continuous Improvement, Software Engineering Practices and all things Software Delivery", "Software Delivery" },
-                    { new Guid("d4d99022-04a5-43ed-982e-b4741adc6478"), "General info topics", "General" },
-                    { new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "Blogs on setting up my workstation", "Workstation Setup" }
+                    { new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"), "Articles talking about how we like to deliver software here at CodeBuildDeploy, using the CodeBuildDeploy software as an example / POC delivery project. Includes key areas and concepts such as Continuous Delivery, DevOps Cultures, Automation, Continuous Improvement, Software Engineering Practices and all things Software Delivery.", "Software Delivery" },
+                    { new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "An engineers workstation setup is an imperative part of their capability to deliver software effectively, comfortably and productively. This section details the setups of the CodeBuildDeploy family. It includes articles on how to setup tools that we find useful.", "Workstation Setup" }
                 });
 
             migrationBuilder.InsertData(
@@ -136,7 +135,6 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                 {
                     { new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"), new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "PowerShellGrep", "Need more...", new DateTime(2015, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2015, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Grep for Windows PowerShell.", "PowerShell Grep", "PowerShellGrep" },
                     { new Guid("26d005b9-5505-4646-9194-cd8358817ac8"), new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "Tools", "This section lists the tools I frequently use. Some are development tools others utility tools making general day to day working easier.", new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "My favourite software tools", "Tools", "Tools" },
-                    { new Guid("2d5076c0-dee7-4dbd-b355-320f28b8f3ce"), new Guid("d4d99022-04a5-43ed-982e-b4741adc6478"), "Links", "Links to External Articles / Resources.", new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Useful links and resources", "Links", "Links" },
                     { new Guid("30c34d37-a663-4879-a294-e1b78431d611"), new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "Libraries", "This section lists libraries I often use. These range from logging frameworks to testing tools used for testing / mocking etc.", new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Libraries you may like", "Libraries", "Libraries" },
                     { new Guid("3e54714a-521d-484c-871c-a85ab52642ea"), new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"), "TrunkBasedDev", "Trunk Based Development.", new DateTime(2021, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Trunk Based Development", "Trunk Based Development", "TrunkBasedDev" },
                     { new Guid("ca8d885a-3a24-4c5b-bb33-61a7956b8996"), new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "PowerShellRemoting", "This section talks about how to enable and work with powershell remoting.", new DateTime(2015, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2015, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Enable and work with powershell remoting.", "PowerShell Remoting", "PowerShellRemoting" },

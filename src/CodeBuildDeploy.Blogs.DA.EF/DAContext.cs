@@ -31,7 +31,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Name).HasMaxLength(50);
-                entity.Property(e => e.Description).HasMaxLength(200);
+                entity.Property(e => e.Description).HasMaxLength(400);
                 entity.HasData(Entities.Categories.GetAll());
             });
 
@@ -39,7 +39,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF
             {
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Name).HasMaxLength(50);
-                entity.Property(e => e.Description).HasMaxLength(200);
+                entity.Property(e => e.Description).HasMaxLength(100);
                 entity.HasData(Entities.Tags.GetDefault());
             });
 
@@ -51,7 +51,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF
                 entity.Property(e => e.UrlSlug).HasMaxLength(50);
                 entity.Property(e => e.Title).HasMaxLength(50);
                 entity.Property(e => e.ShortDescription).HasMaxLength(50);
-                entity.Property(e => e.Description).HasMaxLength(150);
+                entity.Property(e => e.Description).HasMaxLength(300);
                 entity.HasData(Entities.Posts.GetDefault());
             });
 

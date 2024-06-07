@@ -19,18 +19,6 @@
                     UrlSlug = "Libraries" },
                 
                 new() {
-                    Id = new Guid("2d5076c0-dee7-4dbd-b355-320f28b8f3ce"),
-                    Title = "Links",
-                    ShortDescription = "Useful links and resources",
-                    Description = "Links to External Articles / Resources.",
-                    Content = "Links",
-                    Published = true,
-                    PostedOn = DateTime.Parse("2015-03-31 00:00:00"),
-                    Modified = DateTime.Parse("2015-03-31 00:00:00"),
-                    CategoryId = new Guid("d4d99022-04a5-43ed-982e-b4741adc6478"),
-                    UrlSlug = "Links" },
-                
-                new() {
                     Id = new Guid("26d005b9-5505-4646-9194-cd8358817ac8"),
                     Title = "Tools",
                     ShortDescription = "My favourite software tools",

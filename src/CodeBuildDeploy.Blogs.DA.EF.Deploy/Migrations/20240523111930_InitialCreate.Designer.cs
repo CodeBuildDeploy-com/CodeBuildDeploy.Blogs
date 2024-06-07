@@ -139,19 +139,6 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"),
-                            CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
-                            Content = "WSLInterop",
-                            Description = "Read how to seamlessly call Linux commands, such as grep, directly from Powershell on you Windows machine.",
-                            Modified = new DateTime(2024, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostedOn = new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Published = true,
-                            ShortDescription = "Linux commands on Windows.",
-                            Title = "WSL Interop",
-                            UrlSlug = "WSLInterop"
-                        },
-                        new
-                        {
                             Id = new Guid("ca8d885a-3a24-4c5b-bb33-61a7956b8996"),
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "PowerShellRemoting",
@@ -165,15 +152,28 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         },
                         new
                         {
+                            Id = new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"),
+                            CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
+                            Content = "WSLInterop",
+                            Description = "Read how to seamlessly call Linux commands, such as grep, directly from Powershell on you Windows machine.",
+                            Modified = new DateTime(2024, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PostedOn = new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Published = true,
+                            ShortDescription = "Linux commands on Windows.",
+                            Title = "WSL Interop",
+                            UrlSlug = "WSLInterop"
+                        },
+                        new
+                        {
                             Id = new Guid("d1ef2a8d-07bd-49cf-a785-a727567e9fc9"),
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "WslAnsible",
-                            Description = "How to setup Ansible on Windows Subsystem for Linux.",
-                            Modified = new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Read how to setup Ansible on Windows Subsystem for Linux, including setting up for seamlessly calling from windows powershell.",
+                            Modified = new DateTime(2024, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostedOn = new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Published = true,
-                            ShortDescription = "Setting up WSL with Ansible.",
-                            Title = "WSL and Ansible",
+                            ShortDescription = "Setting up Ansible on WSL",
+                            Title = "Ansible on WSL",
                             UrlSlug = "WslAnsible"
                         },
                         new

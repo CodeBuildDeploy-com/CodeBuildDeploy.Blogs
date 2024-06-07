@@ -32,15 +32,15 @@
                 
                 new() {
                     Id = new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"),
-                    Title = "PowerShell Grep",
-                    ShortDescription = "Grep for Windows PowerShell.",
-                    Description = "Need more...",
-                    Content = "PowerShellGrep",
+                    Title = "WSL Interop",
+                    ShortDescription = "Linux commands on Windows.",
+                    Description = "Read how to seamlessly call Linux commands, such as grep, directly from Powershell on you Windows machine.",
+                    Content = "WSLInterop",
                     Published = true,
-                    PostedOn = DateTime.Parse("2015-05-31 00:00:00"),
-                    Modified = DateTime.Parse("2015-05-31 00:00:00"),
+                    PostedOn = DateTime.Parse("2019-10-09 00:00:00"),
+                    Modified = DateTime.Parse("2024-04-07 00:00:00"),
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
-                    UrlSlug = "PowerShellGrep" },
+                    UrlSlug = "WSLInterop" },
                 
                 new() {
                     Id = new Guid("ca8d885a-3a24-4c5b-bb33-61a7956b8996"),
@@ -70,7 +70,7 @@
                     Id = new Guid("3e54714a-521d-484c-871c-a85ab52642ea"),
                     Title = "Trunk Based Development",
                     ShortDescription = "Trunk Based Development",
-                    Description = "Trunk Based Development.",
+                    Description = "Trunk Based Development is a branching strategy that operates with no long-running branches. Commits are made directly on main and releases come from builds of main.",
                     Content = "TrunkBasedDev",
                     Published = true,
                     PostedOn = DateTime.Parse("2021-10-11 00:00:00"),

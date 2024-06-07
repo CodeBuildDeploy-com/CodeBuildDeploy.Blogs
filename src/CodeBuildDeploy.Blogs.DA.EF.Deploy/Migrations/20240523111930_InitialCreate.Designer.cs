@@ -141,14 +141,14 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         {
                             Id = new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"),
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
-                            Content = "PowerShellGrep",
-                            Description = "Need more...",
-                            Modified = new DateTime(2015, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostedOn = new DateTime(2015, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Content = "WSLInterop",
+                            Description = "Read how to seamlessly call Linux commands, such as grep, directly from Powershell on you Windows machine.",
+                            Modified = new DateTime(2024, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PostedOn = new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Published = true,
-                            ShortDescription = "Grep for Windows PowerShell.",
-                            Title = "PowerShell Grep",
-                            UrlSlug = "PowerShellGrep"
+                            ShortDescription = "Linux commands on Windows.",
+                            Title = "WSL Interop",
+                            UrlSlug = "WSLInterop"
                         },
                         new
                         {
@@ -181,7 +181,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                             Id = new Guid("3e54714a-521d-484c-871c-a85ab52642ea"),
                             CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
                             Content = "TrunkBasedDev",
-                            Description = "Trunk Based Development.",
+                            Description = "Trunk Based Development is a branching strategy that operates with no long-running branches. Commits are made directly on main and releases come from builds of main.",
                             Modified = new DateTime(2021, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostedOn = new DateTime(2021, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Published = true,
@@ -217,6 +217,16 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         {
                             PostId = new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"),
                             TagId = new Guid("45485ccf-cc1c-40c2-ac9b-c74a17cc2711")
+                        },
+                        new
+                        {
+                            PostId = new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"),
+                            TagId = new Guid("73dd1c87-742e-4154-b88d-7c2077b90151")
+                        },
+                        new
+                        {
+                            PostId = new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"),
+                            TagId = new Guid("03bbd02b-0b2c-4eff-9874-8561b8bbcafa")
                         },
                         new
                         {

@@ -8,6 +8,8 @@
             [
                 new() { PostId = new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"), TagId = new Guid("2a0b3209-f46c-45fe-b7d6-8824a09f9504") },
                 new() { PostId = new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"), TagId = new Guid("45485ccf-cc1c-40c2-ac9b-c74a17cc2711") },
+                new() { PostId = new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"), TagId = new Guid("73dd1c87-742e-4154-b88d-7c2077b90151") },
+                new() { PostId = new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"), TagId = new Guid("03bbd02b-0b2c-4eff-9874-8561b8bbcafa") },
                 new() { PostId = new Guid("ca8d885a-3a24-4c5b-bb33-61a7956b8996"), TagId = new Guid("2a0b3209-f46c-45fe-b7d6-8824a09f9504") },
                 new() { PostId = new Guid("ca8d885a-3a24-4c5b-bb33-61a7956b8996"), TagId = new Guid("45485ccf-cc1c-40c2-ac9b-c74a17cc2711") },
                 new() { PostId = new Guid("d1ef2a8d-07bd-49cf-a785-a727567e9fc9"), TagId = new Guid("2a0b3209-f46c-45fe-b7d6-8824a09f9504") },

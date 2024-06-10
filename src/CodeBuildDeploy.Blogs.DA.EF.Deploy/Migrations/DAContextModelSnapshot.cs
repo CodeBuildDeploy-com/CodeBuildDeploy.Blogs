@@ -143,7 +143,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                             Modified = new DateTime(2015, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostedOn = new DateTime(2015, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Published = true,
-                            ShortDescription = "Enable and work with powershell remoting.",
+                            ShortDescription = "Enable and work with powershell remoting",
                             Title = "PowerShell Remoting",
                             UrlSlug = "PowerShellRemoting"
                         },
@@ -153,10 +153,10 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "WSLInterop",
                             Description = "Read how to seamlessly call Linux commands, such as grep, directly from Powershell on you Windows machine.",
-                            Modified = new DateTime(2024, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Modified = new DateTime(2024, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostedOn = new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Published = true,
-                            ShortDescription = "Linux commands on Windows.",
+                            ShortDescription = "Linux commands on Windows",
                             Title = "WSL Interop",
                             UrlSlug = "WSLInterop"
                         },
@@ -166,7 +166,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "WslAnsible",
                             Description = "Read how to setup Ansible on Windows Subsystem for Linux, including setting up for seamlessly calling from windows powershell.",
-                            Modified = new DateTime(2024, 4, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Modified = new DateTime(2024, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostedOn = new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Published = true,
                             ShortDescription = "Setting up Ansible on WSL",
@@ -185,6 +185,19 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                             ShortDescription = "Trunk Based Development",
                             Title = "Trunk Based Development",
                             UrlSlug = "TrunkBasedDev"
+                        },
+                        new
+                        {
+                            Id = new Guid("c5fecdc6-549a-41ce-ad63-fc8db2ab4e01"),
+                            CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
+                            Content = "MyShell",
+                            Description = "Having fun customizing my terminal and making my prompt look awesome, with Oh my Posh 3 and Nerd fonts.",
+                            Modified = new DateTime(2024, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PostedOn = new DateTime(2024, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Published = true,
+                            ShortDescription = "Having fun customizing my terminal",
+                            Title = "Oh MY Shell",
+                            UrlSlug = "MyShell"
                         });
                 });
 
@@ -264,6 +277,11 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         {
                             PostId = new Guid("3e54714a-521d-484c-871c-a85ab52642ea"),
                             TagId = new Guid("6961e675-7008-46a5-a75d-1c473ada45ea")
+                        },
+                        new
+                        {
+                            PostId = new Guid("c5fecdc6-549a-41ce-ad63-fc8db2ab4e01"),
+                            TagId = new Guid("2a0b3209-f46c-45fe-b7d6-8824a09f9504")
                         });
                 });
 

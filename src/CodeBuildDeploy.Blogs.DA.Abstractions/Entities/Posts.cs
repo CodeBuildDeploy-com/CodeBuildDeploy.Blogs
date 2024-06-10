@@ -33,7 +33,7 @@
                 new() {
                     Id = new Guid("ca8d885a-3a24-4c5b-bb33-61a7956b8996"),
                     Title = "PowerShell Remoting",
-                    ShortDescription = "Enable and work with powershell remoting.",
+                    ShortDescription = "Enable and work with powershell remoting",
                     Description = "This section talks about how to enable and work with powershell remoting.",
                     Content = "PowerShellRemoting",
                     Published = true,
@@ -45,12 +45,12 @@
                 new() {
                     Id = new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"),
                     Title = "WSL Interop",
-                    ShortDescription = "Linux commands on Windows.",
+                    ShortDescription = "Linux commands on Windows",
                     Description = "Read how to seamlessly call Linux commands, such as grep, directly from Powershell on you Windows machine.",
                     Content = "WSLInterop",
                     Published = true,
                     PostedOn = DateTime.Parse("2019-10-09 00:00:00"),
-                    Modified = DateTime.Parse("2024-04-07 00:00:00"),
+                    Modified = DateTime.Parse("2024-06-07 00:00:00"),
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "WSLInterop" },
 
@@ -62,7 +62,7 @@
                     Content = "WslAnsible",
                     Published = true,
                     PostedOn = DateTime.Parse("2019-10-09 00:00:00"),
-                    Modified = DateTime.Parse("2024-04-07 00:00:00"),
+                    Modified = DateTime.Parse("2024-06-07 00:00:00"),
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "WslAnsible" },
                 
@@ -76,7 +76,19 @@
                     PostedOn = DateTime.Parse("2021-10-11 00:00:00"),
                     Modified = DateTime.Parse("2021-10-11 00:00:00"),
                     CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
-                    UrlSlug = "TrunkBasedDev" }
+                    UrlSlug = "TrunkBasedDev" },
+
+                new() {
+                    Id = new Guid("c5fecdc6-549a-41ce-ad63-fc8db2ab4e01"),
+                    Title = "Oh MY Shell",
+                    ShortDescription = "Having fun customizing my PowerShell terminal",
+                    Description = "Having fun customizing my terminal and making my prompt look awesome, with Oh my Posh 3 and Nerd fonts.",
+                    Content = "MyShell",
+                    Published = true,
+                    PostedOn = DateTime.Parse("2024-06-10 00:00:00"),
+                    Modified = DateTime.Parse("2024-06-10 00:00:00"),
+                    CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
+                    UrlSlug = "MyShell" }
             ];
         }
     }

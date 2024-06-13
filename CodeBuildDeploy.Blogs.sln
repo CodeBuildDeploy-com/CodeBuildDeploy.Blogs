@@ -12,9 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Version.props = Version.props
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azureDevOps", "azureDevOps", "{18F4D70D-7A1B-4DA1-AA05-E58507100BC3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".ado", ".ado", "{18F4D70D-7A1B-4DA1-AA05-E58507100BC3}"
 	ProjectSection(SolutionItems) = preProject
-		azureDevOps\azure-pipelines.yml = azureDevOps\azure-pipelines.yml
+		.ado\azure-pipelines.yml = .ado\azure-pipelines.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8E1284C1-47DA-405E-9D25-2DCE4BCEAE31}"

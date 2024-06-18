@@ -52,6 +52,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF
                 entity.Property(e => e.Title).HasMaxLength(50);
                 entity.Property(e => e.ShortDescription).HasMaxLength(50);
                 entity.Property(e => e.Description).HasMaxLength(300);
+                entity.Property(e => e.Author).HasMaxLength(40);
                 entity.HasData(Entities.Posts.GetDefault());
             });
 

@@ -64,6 +64,10 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Author")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("Category_Id");
@@ -111,6 +115,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("30c34d37-a663-4879-a294-e1b78431d611"),
+                            Author = "Mark Pollard",
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "Libraries",
                             Description = "This section lists libraries I often use. These range from logging frameworks to testing tools used for testing / mocking etc.",
@@ -124,6 +129,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("26d005b9-5505-4646-9194-cd8358817ac8"),
+                            Author = "Mark Pollard",
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "Tools",
                             Description = "This section lists the tools I frequently use. Some are development tools others utility tools making general day to day working easier.",
@@ -137,6 +143,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("ca8d885a-3a24-4c5b-bb33-61a7956b8996"),
+                            Author = "Mark Pollard",
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "PowerShellRemoting",
                             Description = "This section talks about how to enable and work with powershell remoting.",
@@ -150,6 +157,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"),
+                            Author = "Mark Pollard",
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "WSLInterop",
                             Description = "Read how to seamlessly call Linux commands, such as grep, directly from Powershell on you Windows machine.",
@@ -163,6 +171,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("d1ef2a8d-07bd-49cf-a785-a727567e9fc9"),
+                            Author = "Mark Pollard",
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "WslAnsible",
                             Description = "Read how to setup Ansible on Windows Subsystem for Linux, including setting up for seamlessly calling from windows powershell.",
@@ -176,6 +185,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("3e54714a-521d-484c-871c-a85ab52642ea"),
+                            Author = "Mark Pollard",
                             CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
                             Content = "TrunkBasedDev",
                             Description = "Trunk Based Development is a branching strategy that operates with no long-running branches. Commits are made directly on main and releases come from builds of main.",
@@ -189,6 +199,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("c5fecdc6-549a-41ce-ad63-fc8db2ab4e01"),
+                            Author = "Mark Pollard",
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "MyShell",
                             Description = "Having fun customizing my terminal and making my prompt look awesome, with Oh my Posh 3 and Nerd fonts.",
@@ -202,6 +213,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"),
+                            Author = "Mark Pollard",
                             CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
                             Content = "DevOpsCLI",
                             Description = "A container configured with all the CLI tools, scripts and extensions, a full stack DevOps cultured engineer needs for managing the AKS cluster instance.",

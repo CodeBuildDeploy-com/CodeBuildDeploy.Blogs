@@ -8,14 +8,15 @@
             [
                 new() { 
                     Id = new Guid("30c34d37-a663-4879-a294-e1b78431d611"), 
-                    Title = "Libraries", 
-                    ShortDescription = "Libraries you may like", 
-                    Description = "This section lists libraries I often use. These range from logging frameworks to testing tools used for testing / mocking etc.", 
-                    Content = "Libraries", 
-                    Published = true, 
-                    PostedOn = DateTime.Parse("2015-03-31 00:00:00"), 
-                    Modified = DateTime.Parse("2015-03-31 00:00:00"), 
-                    CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), 
+                    Title = "Libraries",
+                    ShortDescription = "Libraries you may like",
+                    Description = "This section lists libraries I often use. These range from logging frameworks to testing tools used for testing / mocking etc.",
+                    Content = "Libraries",
+                    Published = true,
+                    PostedOn = DateTime.Parse("2015-03-31 00:00:00"),
+                    Modified = DateTime.Parse("2015-03-31 00:00:00"),
+                    Author = "Mark Pollard",
+                    CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "Libraries" },
                 
                 new() {
@@ -27,6 +28,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2015-03-31 00:00:00"),
                     Modified = DateTime.Parse("2024-06-17 00:00:00"),
+                    Author = "Mark Pollard",
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "Tools" },
                 
@@ -39,6 +41,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2015-05-31 00:00:00"),
                     Modified = DateTime.Parse("2015-05-31 00:00:00"),
+                    Author = "Mark Pollard",
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "PowerShellRemoting" },
 
@@ -51,6 +54,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2019-10-09 00:00:00"),
                     Modified = DateTime.Parse("2024-06-07 00:00:00"),
+                    Author = "Mark Pollard",
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "WSLInterop" },
 
@@ -63,6 +67,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2019-10-09 00:00:00"),
                     Modified = DateTime.Parse("2024-06-07 00:00:00"),
+                    Author = "Mark Pollard",
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "WslAnsible" },
                 
@@ -75,6 +80,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2021-10-11 00:00:00"),
                     Modified = DateTime.Parse("2021-10-11 00:00:00"),
+                    Author = "Mark Pollard",
                     CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
                     UrlSlug = "TrunkBasedDev" },
 
@@ -87,6 +93,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2024-06-10 00:00:00"),
                     Modified = DateTime.Parse("2024-06-10 00:00:00"),
+                    Author = "Mark Pollard",
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "MyShell" },
 
@@ -99,6 +106,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2024-06-18 00:00:00"),
                     Modified = DateTime.Parse("2024-06-18 00:00:00"),
+                    Author = "Mark Pollard",
                     CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
                     UrlSlug = "devops-cli-aks" },
 
@@ -107,11 +115,12 @@
                     Id = new Guid("6181d9cc-ef13-42b3-aa66-ef2dc5b54fae"),
                     Title = "Zero Bugs",
                     ShortDescription = "Delete all the bugs from your backlog, now!",
-                    Description = "It is impossible for developers to continuously produce bug-free, production ready code. Bugs will always exist. This article is about getting to a state of zero known bugs and that is absolutely possible.",
+                    Description = "It is impossible for software engineers to continuously produce bug-free, production ready code. Bugs will always exist. This article is about how we effectively handle such issues, acheiving a state of zero bugs backlog.",
                     Content = "ZeroBugs",
                     Published = true,
                     PostedOn = DateTime.Parse("2024-06-18 00:00:00"),
                     Modified = DateTime.Parse("2024-06-18 00:00:00"),
+                    Author = "Andrew White",
                     CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
                     UrlSlug = "ZeroBugs" }
             ];

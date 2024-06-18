@@ -26,7 +26,7 @@
                     Content = "Tools",
                     Published = true,
                     PostedOn = DateTime.Parse("2015-03-31 00:00:00"),
-                    Modified = DateTime.Parse("2015-03-31 00:00:00"),
+                    Modified = DateTime.Parse("2024-06-17 00:00:00"),
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "Tools" },
                 
@@ -88,7 +88,19 @@
                     PostedOn = DateTime.Parse("2024-06-10 00:00:00"),
                     Modified = DateTime.Parse("2024-06-10 00:00:00"),
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
-                    UrlSlug = "MyShell" }
+                    UrlSlug = "MyShell" },
+
+                new() {
+                    Id = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"),
+                    Title = "AKS CLI container",
+                    ShortDescription = "AKS CLI container for DevOps Teams",
+                    Description = "A container configured with all the CLI tools, scripts and extensions, a full stack DevOps cultured engineer needs for managing the AKS cluster instance.",
+                    Content = "DevOpsCLI",
+                    Published = true,
+                    PostedOn = DateTime.Parse("2024-06-18 00:00:00"),
+                    Modified = DateTime.Parse("2024-06-18 00:00:00"),
+                    CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
+                    UrlSlug = "devops-cli-aks" }
             ];
         }
     }

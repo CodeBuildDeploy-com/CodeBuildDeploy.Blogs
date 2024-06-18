@@ -118,10 +118,12 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                     { new Guid("03bbd02b-0b2c-4eff-9874-8561b8bbcafa"), "Linux Operating System'", "Linux" },
                     { new Guid("2a0b3209-f46c-45fe-b7d6-8824a09f9504"), "PowerShell Core and Windows PowerShell", "PowerShell" },
                     { new Guid("313135f2-aa40-481b-9646-0e30052b5462"), "Microsoft .Net Framework", ".NET" },
+                    { new Guid("37519618-949c-48dd-a099-9f991b950ada"), "Kubernetes / K8s, used for automating deployment, scaling, and management of containers", "Kubernetes" },
                     { new Guid("45485ccf-cc1c-40c2-ac9b-c74a17cc2711"), "Windows Operating System", "Windows" },
                     { new Guid("6961e675-7008-46a5-a75d-1c473ada45ea"), "Git Source Control", "Git" },
                     { new Guid("73dd1c87-742e-4154-b88d-7c2077b90151"), "Unix based Operating System", "UNIX" },
                     { new Guid("79adf12b-1c17-42c9-9d44-5cce1b9f3c82"), "Ansible Automation", "Ansible" },
+                    { new Guid("8df60d46-9a9d-46e1-b90d-d9bac8110ef7"), "Docker Containers", "Containers" },
                     { new Guid("f4547542-2b7f-4f9e-8a30-01850657a6b2"), "Azure Cloud", "Azure" },
                     { new Guid("f5bc44bf-f42e-447d-8bed-ee6aa59061e3"), "Python scripting language", "Python" },
                     { new Guid("f7e79415-98c9-46ab-a51e-7afd7fbd9c8a"), "Microsoft ASP.NET", "ASP.NET" }
@@ -134,12 +136,13 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                 values: new object[,]
                 {
                     { new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"), new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "WSLInterop", "Read how to seamlessly call Linux commands, such as grep, directly from Powershell on you Windows machine.", new DateTime(2024, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Linux commands on Windows", "WSL Interop", "WSLInterop" },
-                    { new Guid("26d005b9-5505-4646-9194-cd8358817ac8"), new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "Tools", "This section lists the tools I frequently use. Some are development tools others utility tools making general day to day working easier.", new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "My favourite software tools", "Tools", "Tools" },
+                    { new Guid("26d005b9-5505-4646-9194-cd8358817ac8"), new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "Tools", "This section lists the tools I frequently use. Some are development tools others utility tools making general day to day working easier.", new DateTime(2024, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "My favourite software tools", "Tools", "Tools" },
                     { new Guid("30c34d37-a663-4879-a294-e1b78431d611"), new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "Libraries", "This section lists libraries I often use. These range from logging frameworks to testing tools used for testing / mocking etc.", new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Libraries you may like", "Libraries", "Libraries" },
                     { new Guid("3e54714a-521d-484c-871c-a85ab52642ea"), new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"), "TrunkBasedDev", "Trunk Based Development is a branching strategy that operates with no long-running branches. Commits are made directly on main and releases come from builds of main.", new DateTime(2021, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Trunk Based Development", "Trunk Based Development", "TrunkBasedDev" },
-                    { new Guid("c5fecdc6-549a-41ce-ad63-fc8db2ab4e01"), new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "MyShell", "Having fun customizing my terminal and making my prompt look awesome, with Oh my Posh 3 and Nerd fonts.", new DateTime(2024, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Having fun customizing my terminal", "Oh MY Shell", "MyShell" },
+                    { new Guid("c5fecdc6-549a-41ce-ad63-fc8db2ab4e01"), new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "MyShell", "Having fun customizing my terminal and making my prompt look awesome, with Oh my Posh 3 and Nerd fonts.", new DateTime(2024, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Having fun customizing my PowerShell terminal", "Oh MY Shell", "MyShell" },
                     { new Guid("ca8d885a-3a24-4c5b-bb33-61a7956b8996"), new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "PowerShellRemoting", "This section talks about how to enable and work with powershell remoting.", new DateTime(2015, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2015, 5, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Enable and work with powershell remoting", "PowerShell Remoting", "PowerShellRemoting" },
-                    { new Guid("d1ef2a8d-07bd-49cf-a785-a727567e9fc9"), new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "WslAnsible", "Read how to setup Ansible on Windows Subsystem for Linux, including setting up for seamlessly calling from windows powershell.", new DateTime(2024, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Setting up Ansible on WSL", "Ansible on WSL", "WslAnsible" }
+                    { new Guid("d1ef2a8d-07bd-49cf-a785-a727567e9fc9"), new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"), "WslAnsible", "Read how to setup Ansible on Windows Subsystem for Linux, including setting up for seamlessly calling from windows powershell.", new DateTime(2024, 6, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "Setting up Ansible on WSL", "Ansible on WSL", "WslAnsible" },
+                    { new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"), new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"), "DevOpsCLI", "A container configured with all the CLI tools, scripts and extensions, a full stack DevOps cultured engineer needs for managing the AKS cluster instance.", new DateTime(2024, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), true, "AKS CLI container for DevOps teams", "AKS CLI container", "devops-cli-aks" }
                 });
 
             migrationBuilder.InsertData(
@@ -160,7 +163,13 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                     { new Guid("d1ef2a8d-07bd-49cf-a785-a727567e9fc9"), new Guid("2a0b3209-f46c-45fe-b7d6-8824a09f9504") },
                     { new Guid("d1ef2a8d-07bd-49cf-a785-a727567e9fc9"), new Guid("45485ccf-cc1c-40c2-ac9b-c74a17cc2711") },
                     { new Guid("d1ef2a8d-07bd-49cf-a785-a727567e9fc9"), new Guid("73dd1c87-742e-4154-b88d-7c2077b90151") },
-                    { new Guid("d1ef2a8d-07bd-49cf-a785-a727567e9fc9"), new Guid("79adf12b-1c17-42c9-9d44-5cce1b9f3c82") }
+                    { new Guid("d1ef2a8d-07bd-49cf-a785-a727567e9fc9"), new Guid("79adf12b-1c17-42c9-9d44-5cce1b9f3c82") },
+                    { new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"), new Guid("03bbd02b-0b2c-4eff-9874-8561b8bbcafa") },
+                    { new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"), new Guid("37519618-949c-48dd-a099-9f991b950ada") },
+                    { new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"), new Guid("45485ccf-cc1c-40c2-ac9b-c74a17cc2711") },
+                    { new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"), new Guid("73dd1c87-742e-4154-b88d-7c2077b90151") },
+                    { new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"), new Guid("8df60d46-9a9d-46e1-b90d-d9bac8110ef7") },
+                    { new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"), new Guid("f4547542-2b7f-4f9e-8a30-01850657a6b2") }
                 });
 
             migrationBuilder.CreateIndex(

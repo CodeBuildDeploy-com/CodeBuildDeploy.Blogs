@@ -15,7 +15,9 @@
                 new() { Id = new Guid("f5bc44bf-f42e-447d-8bed-ee6aa59061e3"), Name = "Python", Description = "Python scripting language" },
                 new() { Id = new Guid("f4547542-2b7f-4f9e-8a30-01850657a6b2"), Name = "Azure", Description = "Azure Cloud" },
                 new() { Id = new Guid("79adf12b-1c17-42c9-9d44-5cce1b9f3c82"), Name = "Ansible", Description = "Ansible Automation" },
-                new() { Id = new Guid("6961e675-7008-46a5-a75d-1c473ada45ea"), Name = "Git", Description = "Git Source Control" }
+                new() { Id = new Guid("6961e675-7008-46a5-a75d-1c473ada45ea"), Name = "Git", Description = "Git Source Control" },
+                new() { Id = new Guid("8df60d46-9a9d-46e1-b90d-d9bac8110ef7"), Name = "Containers", Description = "Docker Containers" },
+                new() { Id = new Guid("37519618-949c-48dd-a099-9f991b950ada"), Name = "Kubernetes", Description = "Kubernetes / K8s, used for automating deployment, scaling, and management of containers" }
             ];
         }
     }

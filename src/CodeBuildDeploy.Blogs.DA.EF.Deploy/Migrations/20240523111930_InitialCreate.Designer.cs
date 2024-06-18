@@ -130,7 +130,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "Tools",
                             Description = "This section lists the tools I frequently use. Some are development tools others utility tools making general day to day working easier.",
-                            Modified = new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Modified = new DateTime(2024, 6, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostedOn = new DateTime(2015, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Published = true,
                             ShortDescription = "My favourite software tools",
@@ -198,9 +198,22 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                             Modified = new DateTime(2024, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostedOn = new DateTime(2024, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Published = true,
-                            ShortDescription = "Having fun customizing my terminal",
+                            ShortDescription = "Having fun customizing my PowerShell terminal",
                             Title = "Oh MY Shell",
                             UrlSlug = "MyShell"
+                        },
+                        new
+                        {
+                            Id = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"),
+                            CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
+                            Content = "DevOpsCLI",
+                            Description = "A container configured with all the CLI tools, scripts and extensions, a full stack DevOps cultured engineer needs for managing the AKS cluster instance.",
+                            Modified = new DateTime(2024, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PostedOn = new DateTime(2024, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Published = true,
+                            ShortDescription = "AKS CLI container for DevOps teams",
+                            Title = "AKS CLI container",
+                            UrlSlug = "devops-cli-aks"
                         });
                 });
 
@@ -285,6 +298,36 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         {
                             PostId = new Guid("c5fecdc6-549a-41ce-ad63-fc8db2ab4e01"),
                             TagId = new Guid("2a0b3209-f46c-45fe-b7d6-8824a09f9504")
+                        },
+                        new
+                        {
+                            PostId = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"),
+                            TagId = new Guid("45485ccf-cc1c-40c2-ac9b-c74a17cc2711")
+                        },
+                        new
+                        {
+                            PostId = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"),
+                            TagId = new Guid("73dd1c87-742e-4154-b88d-7c2077b90151")
+                        },
+                        new
+                        {
+                            PostId = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"),
+                            TagId = new Guid("03bbd02b-0b2c-4eff-9874-8561b8bbcafa")
+                        },
+                        new
+                        {
+                            PostId = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"),
+                            TagId = new Guid("f4547542-2b7f-4f9e-8a30-01850657a6b2")
+                        },
+                        new
+                        {
+                            PostId = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"),
+                            TagId = new Guid("8df60d46-9a9d-46e1-b90d-d9bac8110ef7")
+                        },
+                        new
+                        {
+                            PostId = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"),
+                            TagId = new Guid("37519618-949c-48dd-a099-9f991b950ada")
                         });
                 });
 
@@ -368,6 +411,18 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                             Id = new Guid("6961e675-7008-46a5-a75d-1c473ada45ea"),
                             Description = "Git Source Control",
                             Name = "Git"
+                        },
+                        new
+                        {
+                            Id = new Guid("8df60d46-9a9d-46e1-b90d-d9bac8110ef7"),
+                            Description = "Docker Containers",
+                            Name = "Containers"
+                        },
+                        new
+                        {
+                            Id = new Guid("37519618-949c-48dd-a099-9f991b950ada"),
+                            Description = "Kubernetes / K8s, used for automating deployment, scaling, and management of containers",
+                            Name = "Kubernetes"
                         });
                 });
 

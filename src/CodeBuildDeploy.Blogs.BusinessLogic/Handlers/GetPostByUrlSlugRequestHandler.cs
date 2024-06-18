@@ -40,6 +40,7 @@ namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
                 Published = dbPost.Published,
                 PostedOn = dbPost.PostedOn,
                 Modified = dbPost.Modified,
+                Author = dbPost.Author,
                 Category = new Category
                 {
                     Name = dbPost.Category.Name,

@@ -41,6 +41,7 @@ namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
                 Published = x.Published,
                 PostedOn = x.PostedOn,
                 Modified = x.Modified,
+                Author = x.Author,
                 Category = new Category
                 {
                     Name = x.Category.Name,

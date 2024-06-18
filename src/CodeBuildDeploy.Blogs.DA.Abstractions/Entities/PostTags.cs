@@ -25,6 +25,7 @@
                 new() { PostId = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"), TagId = new Guid("f4547542-2b7f-4f9e-8a30-01850657a6b2") },
                 new() { PostId = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"), TagId = new Guid("8df60d46-9a9d-46e1-b90d-d9bac8110ef7") },
                 new() { PostId = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"), TagId = new Guid("37519618-949c-48dd-a099-9f991b950ada") },
+                new() { PostId = new Guid("6181d9cc-ef13-42b3-aa66-ef2dc5b54fae"), TagId = new Guid("48306da3-dab0-4b0e-b063-0acbaf126891") },
             ];
         }
     }

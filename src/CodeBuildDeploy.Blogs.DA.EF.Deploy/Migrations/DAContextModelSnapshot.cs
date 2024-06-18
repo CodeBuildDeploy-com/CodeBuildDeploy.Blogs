@@ -211,6 +211,19 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                             ShortDescription = "AKS CLI container for DevOps teams",
                             Title = "AKS CLI container",
                             UrlSlug = "devops-cli-aks"
+                        },
+                        new
+                        {
+                            Id = new Guid("6181d9cc-ef13-42b3-aa66-ef2dc5b54fae"),
+                            CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
+                            Content = "ZeroBugs",
+                            Description = "It is impossible for developers to continuously produce bug-free, production ready code. Bugs will always exist. This article is about getting to a state of zero known bugs and that is absolutely possible.",
+                            Modified = new DateTime(2024, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PostedOn = new DateTime(2024, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Published = true,
+                            ShortDescription = "Delete all the bugs from your backlog, now!",
+                            Title = "Zero Bugs",
+                            UrlSlug = "ZeroBugs"
                         });
                 });
 
@@ -325,6 +338,11 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         {
                             PostId = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"),
                             TagId = new Guid("37519618-949c-48dd-a099-9f991b950ada")
+                        },
+                        new
+                        {
+                            PostId = new Guid("6181d9cc-ef13-42b3-aa66-ef2dc5b54fae"),
+                            TagId = new Guid("48306da3-dab0-4b0e-b063-0acbaf126891")
                         });
                 });
 
@@ -420,6 +438,12 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                             Id = new Guid("37519618-949c-48dd-a099-9f991b950ada"),
                             Description = "Kubernetes / K8s, used for automating deployment, scaling, and management of containers",
                             Name = "Kubernetes"
+                        },
+                        new
+                        {
+                            Id = new Guid("48306da3-dab0-4b0e-b063-0acbaf126891"),
+                            Description = "Tracking and planning of project issues",
+                            Name = "Issue Management"
                         });
                 });
 

@@ -93,14 +93,27 @@
                 new() {
                     Id = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"),
                     Title = "AKS CLI container",
-                    ShortDescription = "AKS CLI container for DevOps Teams",
+                    ShortDescription = "AKS CLI container for DevOps teams",
                     Description = "A container configured with all the CLI tools, scripts and extensions, a full stack DevOps cultured engineer needs for managing the AKS cluster instance.",
                     Content = "DevOpsCLI",
                     Published = true,
                     PostedOn = DateTime.Parse("2024-06-18 00:00:00"),
                     Modified = DateTime.Parse("2024-06-18 00:00:00"),
                     CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
-                    UrlSlug = "devops-cli-aks" }
+                    UrlSlug = "devops-cli-aks" },
+
+
+                new() {
+                    Id = new Guid("6181d9cc-ef13-42b3-aa66-ef2dc5b54fae"),
+                    Title = "Zero Bugs",
+                    ShortDescription = "Delete all the bugs from your backlog, now!",
+                    Description = "It is impossible for developers to continuously produce bug-free, production ready code. Bugs will always exist. This article is about getting to a state of zero known bugs and that is absolutely possible.",
+                    Content = "ZeroBugs",
+                    Published = true,
+                    PostedOn = DateTime.Parse("2024-06-18 00:00:00"),
+                    Modified = DateTime.Parse("2024-06-18 00:00:00"),
+                    CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
+                    UrlSlug = "ZeroBugs" }
             ];
         }
     }

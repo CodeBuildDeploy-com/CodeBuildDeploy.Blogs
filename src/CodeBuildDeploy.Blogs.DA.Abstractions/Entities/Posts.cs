@@ -99,16 +99,16 @@
 
                 new() {
                     Id = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"),
-                    Title = "AKS CLI container",
-                    ShortDescription = "AKS CLI container for DevOps teams",
-                    Description = "A container configured with all the CLI tools, scripts and extensions, a full stack DevOps cultured engineer needs for managing the AKS cluster instance.",
+                    Title = "Azure Envs CLI container",
+                    ShortDescription = "Azure Envs CLI container for DevOps teams",
+                    Description = "A container configured with all the CLI tools, scripts and extensions, a full stack DevOps cultured engineer needs for managing Azure environments resources such as AKS clusters.",
                     Content = "DevOpsCLI",
                     Published = true,
                     PostedOn = DateTime.Parse("2024-06-18 00:00:00"),
                     Modified = DateTime.Parse("2024-06-18 00:00:00"),
                     Author = "Mark Pollard",
                     CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
-                    UrlSlug = "devops-cli-aks" },
+                    UrlSlug = "devops-cli-azenvs" },
 
 
                 new() {

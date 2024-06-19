@@ -217,13 +217,13 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                             Author = "Mark Pollard",
                             CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
                             Content = "DevOpsCLI",
-                            Description = "A container configured with all the CLI tools, scripts and extensions, a full stack DevOps cultured engineer needs for managing the AKS cluster instance.",
+                            Description = "A container configured with all the CLI tools, scripts and extensions, a full stack DevOps cultured engineer needs for managing Azure environments resources such as AKS clusters.",
                             Modified = new DateTime(2024, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PostedOn = new DateTime(2024, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Published = true,
-                            ShortDescription = "AKS CLI container for DevOps teams",
-                            Title = "AKS CLI container",
-                            UrlSlug = "devops-cli-aks"
+                            ShortDescription = "Azure Envs CLI container for DevOps teams",
+                            Title = "Azure Envs CLI container",
+                            UrlSlug = "devops-cli-azenvs"
                         },
                         new
                         {

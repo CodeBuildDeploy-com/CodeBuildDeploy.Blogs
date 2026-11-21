@@ -13,9 +13,9 @@ namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
     {
         private readonly ILogger<GetPostByUrlSlugRequestHandler> _logger;
 
-        private readonly IQueryRunner<PostByUrlSlugQuery, DA.Entities.Post> _queryRunner;
-
         private readonly IMapper _mapper;
+
+        private readonly IQueryRunner<PostByUrlSlugQuery, DA.Entities.Post> _queryRunner;
 
         public GetPostByUrlSlugRequestHandler(IQueryRunner<PostByUrlSlugQuery, DA.Entities.Post> queryRunner, IMapper mapper, ILogger<GetPostByUrlSlugRequestHandler> logger)
         {
@@ -28,32 +28,7 @@ namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
         {
             var dbPost = await _queryRunner.ExecuteAsync(new PostByUrlSlugQuery(request.UrlSlug), cancellationToken);
 
-            //return _mapper.Map<Post>(dbPost);
-
-            return await Task.FromResult(new Post
-            {
-                UrlSlug = dbPost.UrlSlug,
-                Title = dbPost.Title,
-                ShortDescription = dbPost.ShortDescription,
-                Description = dbPost.Description,
-                Content = dbPost.Content,
-                Published = dbPost.Published,
-                PostedOn = dbPost.PostedOn,
-                Modified = dbPost.Modified,
-                Author = dbPost.Author,
-                Category = new Category
-                {
-                    Name = dbPost.Category.Name,
-                    Description = dbPost.Category.Description
-                },
-                Tags = dbPost.PostTags.Select(pt =>
-                            new Tag
-                            {
-                                Name = pt.Tag.Name,
-                                Description = pt.Tag.Description
-
-                            }).ToList()
-            });
+            return _mapper.Map<Post>(dbPost);
         }
     }
 }

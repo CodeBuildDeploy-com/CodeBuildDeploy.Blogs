@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.Logging;
-
-using MediatR;
+﻿using MediatR;
 
 using CodeBuildDeploy.Blogs.BusinessLogic.Requests;
 using CodeBuildDeploy.Blogs.DA.Queries;
@@ -12,12 +9,9 @@ namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
     {
         private readonly IQueryRunner<TotalPostsQuery, int> _queryRunner;
 
-        private readonly IMapper _mapper;
-
-        public GetTotalPostsRequestHandler(IQueryRunner<TotalPostsQuery, int> queryRunner, IMapper mapper)
+        public GetTotalPostsRequestHandler(IQueryRunner<TotalPostsQuery, int> queryRunner)
         {
             _queryRunner = queryRunner;
-            _mapper = mapper;
         }
 
         public async Task<int> Handle(GetTotalPostsRequest request, CancellationToken cancellationToken)

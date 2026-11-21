@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS base
+FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine AS base
 # Turn off Invariant mode and install icu packages for EntityFramework. 
 # See: https://github.com/dotnet/SqlClient/issues/220
 RUN apk add --no-cache icu-libs
@@ -7,12 +7,13 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS sdkbase
+FROM mcr.microsoft.com/dotnet/sdk:10.0-alpine AS sdkbase
 # Turn off Invariant mode and install icu packages for EntityFramework. 
 # See: https://github.com/dotnet/SqlClient/issues/220
 RUN apk add --no-cache icu-libs
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
-RUN curl -L https://raw.githubusercontent.com/Microsoft/artifacts-credprovider/master/helpers/installcredprovider.sh  | sh
+RUN dotnet tool install --global Microsoft.Artifacts.CredentialProvider.NuGet.Tool --version 2.0.5 --allow-roll-forward --source https://api.nuget.org/v3/index.json
+ENV PATH="$PATH:/root/.dotnet/tools"
 ARG FEED_ACCESSTOKEN
 ENV VSS_NUGET_EXTERNAL_FEED_ENDPOINTS="{\"endpointCredentials\": [{\"endpoint\":\"https://markpollard.pkgs.visualstudio.com/CodeBuildDeploy/_packaging/CodeBuildDeploy/nuget/v3/index.json\", \"username\":\"docker\", \"password\":\"${FEED_ACCESSTOKEN}\"}]}"
 ARG BUILD_CONFIGURATION=Release
@@ -41,8 +42,7 @@ WORKDIR "/work/src/CodeBuildDeploy.Blogs.Api"
 RUN dotnet publish "./CodeBuildDeploy.Blogs.Api.csproj" --no-build -p:OutDir=/app/build -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM build AS buildMigration
-RUN dotnet tool install --version 8.0.3 --global dotnet-ef
-ENV PATH="$PATH:/root/.dotnet/tools"
+RUN dotnet tool install --version 10.0.15 --global dotnet-ef
 WORKDIR /work
 COPY ["src/CodeBuildDeploy.Blogs.DA.EF.Deploy/CodeBuildDeploy.Blogs.DA.EF.Deploy.csproj", "src/CodeBuildDeploy.Blogs.DA.EF.Deploy/"]
 RUN dotnet restore "src/CodeBuildDeploy.Blogs.DA.EF.Deploy/CodeBuildDeploy.Blogs.DA.EF.Deploy.csproj"

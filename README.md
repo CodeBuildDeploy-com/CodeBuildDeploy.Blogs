@@ -10,6 +10,8 @@ The api is deployed as a container, into [AKS](https://azure.microsoft.com/en-gb
 
 # Standard DotNet Build
 
+Run the commands below from the repository root with the .NET 10 SDK.
+
 ## Building
 
 ```bash
@@ -19,13 +21,13 @@ dotnet build
 ## Publishing
 
 ```bash
-dotnet publish ./CodeBuildDeploy.Blogs.Api/CodeBuildDeploy.Blogs.Api.csproj --framework net8.0 --self-contained:false --no-restore -o ./publish
+dotnet publish ./src/CodeBuildDeploy.Blogs.Api/CodeBuildDeploy.Blogs.Api.csproj --framework net10.0 --self-contained:false --no-restore -o ./publish
 ```
 
 ## Running
 
 ```bash
- dotnet run ./CodeBuildDeploy.Blogs.Api/CodeBuildDeploy.Blogs.Api.csproj
+dotnet run --project ./src/CodeBuildDeploy.Blogs.Api/CodeBuildDeploy.Blogs.Api.csproj
 ```
 
 # Docker Build

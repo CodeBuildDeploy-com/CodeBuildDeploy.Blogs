@@ -13,9 +13,9 @@ namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
     {
         private readonly ILogger<GetAllPostsRequestHandler> _logger;
 
-        private readonly IQueryRunner<AllPostsQuery, IList<DA.Entities.Post>> _queryRunner;
-
         private readonly IMapper _mapper;
+
+        private readonly IQueryRunner<AllPostsQuery, IList<DA.Entities.Post>> _queryRunner;
 
         public GetAllPostsRequestHandler(IQueryRunner<AllPostsQuery, IList<DA.Entities.Post>> queryRunner, IMapper mapper, ILogger<GetAllPostsRequestHandler> logger)
         {
@@ -28,33 +28,7 @@ namespace CodeBuildDeploy.Blogs.BusinessLogic.Handlers
         {
             var dbPosts = await _queryRunner.ExecuteAsync(new AllPostsQuery(), cancellationToken);
 
-            //return dbPosts.Select(_mapper.Map<Post>).ToList();
-
-            return dbPosts.Select(
-            x => new Post
-            {
-                UrlSlug = x.UrlSlug,
-                Title = x.Title,
-                ShortDescription = x.ShortDescription,
-                Description = x.Description,
-                Content = x.Content,
-                Published = x.Published,
-                PostedOn = x.PostedOn,
-                Modified = x.Modified,
-                Author = x.Author,
-                Category = new Category
-                {
-                    Name = x.Category.Name,
-                    Description = x.Category.Description
-                },
-                Tags = x.PostTags.Select(pt =>
-                            new Tag
-                            {
-                                Name = pt.Tag.Name,
-                                Description = pt.Tag.Description
-
-                            }).ToList()
-            }).ToList();
+            return _mapper.Map<IList<Post>>(dbPosts);
         }
     }
 }

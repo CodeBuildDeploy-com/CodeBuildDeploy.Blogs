@@ -102,9 +102,10 @@ stages:
           sed -ri -e "s/-\{\{ required `"name append populated by build`" null \}\}/-${env:DATA_NAME_VERSION}/" helm/service/templates/data-job.yaml
           sed -ri -e "s#image: \{\{ required `"Populated by build`" null \}\}#image: ${env:DATA_IMAGE}#" helm/service/templates/data-job.yaml
     
-    - task: HelmDeploy@0
+    - task: HelmDeploy@1
       displayName: Helm Package
       inputs:
+        connectionType: None
         command: package
         chartPath: helm/service
         destination: $(Build.ArtifactStagingDirectory)/helm
@@ -131,7 +132,7 @@ stages:
             latest
             $(Build.Number)
 
-      - task: AzureCLI@2
+      - task: AzureCLI@3
         displayName: ACR Login
         inputs:
           azureSubscription: '$(Azure.Subscription.ProdPremium)'

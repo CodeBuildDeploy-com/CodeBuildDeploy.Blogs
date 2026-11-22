@@ -5,14 +5,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ $instanceName }}-{{ required "name append populated by build" null }}
+  name: {{ $instanceName }}-{{ .Chart.Version | replace "." "-" | lower }}
 spec:
   template:
     spec:
       containers:
         - name: {{ $serviceName }}
 
-          image: {{ required "Populated by build" null }}
+          image: {{ printf "%s/%s:%s" (required "imageRegistry is required" .Values.imageRegistry) $serviceName .Chart.Version | quote }}
           imagePullPolicy: IfNotPresent
 
           env:

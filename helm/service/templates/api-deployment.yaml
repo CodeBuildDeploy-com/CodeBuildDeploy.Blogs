@@ -21,7 +21,7 @@ spec:
       containers:
         - name: {{ $serviceName }}
 
-          image: {{ required "Populated by build" null }}
+          image: {{ printf "%s/%s:%s" (required "imageRegistry is required" .Values.imageRegistry) $serviceName .Chart.Version | quote }}
           imagePullPolicy: IfNotPresent
 
           ports:

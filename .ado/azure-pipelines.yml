@@ -89,19 +89,6 @@ stages:
         buildContext: .
         arguments: '--target finalMigration --build-arg FEED_ACCESSTOKEN=$(VSS_NUGET_ACCESSTOKEN) --build-arg VERSION=$(Build.Number) --build-arg ASSEMBLY_VERSION=$(Version.Assembly) --build-arg FILE_VERSION=$(Version.File) --build-arg INFORMATIONAL_VERSION=$(Version.Informational) --build-arg PACKAGE_VERSION=$(Build.Number)'
 
-    - task: PowerShell@2
-      displayName: Helm Set Image Versions
-      env:
-        APP_IMAGE: "$(Acr.Repository.Name).azurecr.io/$(Service.Name.KebabCase):$(Build.Number)"
-        DATA_NAME_VERSION: "$(Version.Informational.Kebab)"
-        DATA_IMAGE: "$(Acr.Repository.Name).azurecr.io/$(Service.Name.KebabCase)-data:$(Build.Number)"
-      inputs:
-        targetType: inline
-        script: |
-          sed -ri -e "s#image: \{\{ required `"Populated by build`" null \}\}#image: ${env:APP_IMAGE}#" helm/service/templates/api-deployment.yaml
-          sed -ri -e "s/-\{\{ required `"name append populated by build`" null \}\}/-${env:DATA_NAME_VERSION}/" helm/service/templates/data-job.yaml
-          sed -ri -e "s#image: \{\{ required `"Populated by build`" null \}\}#image: ${env:DATA_IMAGE}#" helm/service/templates/data-job.yaml
-    
     - task: HelmDeploy@1
       displayName: Helm Package
       inputs:
@@ -135,7 +122,7 @@ stages:
       - task: AzureCLI@3
         displayName: ACR Login
         inputs:
-          azureSubscription: '$(Azure.Subscription.ProdPremium)'
+          azureSubscription: '$(Azure.Subscription.NonProdEnterprise)'
           scriptType: bash
           scriptLocation: inlineScript
           inlineScript: |

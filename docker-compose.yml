@@ -7,7 +7,7 @@ networks:
 
 services:
   codebuilddeploy-blogs-data:
-    image: codebuilddeploy.azurecr.io/codebuilddeploy-blogs-data:latest
+    image: codebuilddeploynonprod.azurecr.io/codebuilddeploy-blogs-data:latest
     build:
       context: .
       dockerfile: ./src/CodeBuildDeploy.Blogs.Api/Dockerfile
@@ -21,7 +21,7 @@ services:
     hostname: codebuilddeploy-blogs-data
 
   codebuilddeploy-blogs:
-    image: codebuilddeploy.azurecr.io/codebuilddeploy-blogs:latest
+    image: codebuilddeploynonprod.azurecr.io/codebuilddeploy-blogs:latest
     build:
       context: .
       dockerfile: ./src/CodeBuildDeploy.Blogs.Api/Dockerfile

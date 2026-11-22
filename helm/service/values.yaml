@@ -1,3 +1,5 @@
+imageRegistry: codebuilddeploynonprod.azurecr.io
+
 # Required environment specific values for the services
 env:
   name: null

@@ -1,0 +1,26 @@
+{{- if .Values.ingress.gatewayName }}
+{{- $env := required "env.name is required" .Values.env.name }}
+{{- $name := printf "%s-codebuilddeploy-blogs" $env }}
+{{- $hostPrefix := ternary "www" $env (eq $env "live") }}
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: {{ $name }}
+spec:
+  parentRefs:
+    - name: {{ .Values.ingress.gatewayName | quote }}
+  hostnames:
+    - {{ printf "%s.codebuilddeploy.co.uk" $hostPrefix | quote }}
+    - {{ printf "%s.codebuilddeploy.com" $hostPrefix | quote }}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /api/Blog
+        - path:
+            type: PathPrefix
+            value: /swagger/blog
+      backendRefs:
+        - name: {{ $name }}
+          port: 80
+{{- end }}

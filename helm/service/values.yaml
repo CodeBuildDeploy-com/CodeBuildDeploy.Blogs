@@ -6,7 +6,7 @@ env:
   shortName: null
 
 ingress:
-  nginxEnabled: false
+  gatewayName: null
 
 # Production values for the services
 replicas:

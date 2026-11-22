@@ -5,6 +5,9 @@ env:
   name: null
   shortName: null
 
+ingress:
+  nginxEnabled: false
+
 # Production values for the services
 replicas:
   api:

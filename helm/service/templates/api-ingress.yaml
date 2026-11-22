@@ -1,3 +1,4 @@
+{{- if .Values.ingress.nginxEnabled }}
 {{ $env := .Values.env.name | required "env.name is required" }}
 {{ $envShort := .Values.env.shortName | required "env.shortName is required" }}
 {{ $serviceName := "codebuilddeploy-blogs" }}
@@ -53,3 +54,4 @@ spec:
 
 status:
   loadBalancer: {}
+{{- end }}

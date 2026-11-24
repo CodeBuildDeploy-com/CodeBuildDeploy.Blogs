@@ -18,10 +18,65 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("blg")
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "10.0.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CodeBuildDeploy.Blogs.DA.Entities.Author", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AvatarPath")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Biography")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("FacebookUrl")
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
+
+                    b.Property<string>("LinkedInUrl")
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("TwitterUrl")
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Author", "blg");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("50f29cf4-ab70-4e9f-b225-4fc31ce5b4f6"),
+                            AvatarPath = "/img/about/me-profile-sm.jpg",
+                            Biography = "I am a senior software engineering and technical leader / Microsoft technologies technical architect, with a strong passion for continuous delivery. I am a firm believer in empowered teams with true DevOps cultures. I encourage responsibility over role, high quality and full stack engineers, showing ownership of the software and its behaviour, end to end, from requirements maturing all the way through to its continual and successful running in Production.",
+                            FacebookUrl = "https://www.facebook.com/m4rkpollard",
+                            LinkedInUrl = "https://www.linkedin.com/in/mark-pollard-351aa163",
+                            Name = "Mark Pollard",
+                            TwitterUrl = "https://twitter.com/m4rk5"
+                        },
+                        new
+                        {
+                            Id = new Guid("1e7c80bb-eaaa-4d36-9e28-573bf9c0e3d4"),
+                            AvatarPath = "/img/about/andrew.white.png",
+                            Biography = "A highly motivated Senior Software Engineer, Andrew has a wide range of commercial experience in designing, developing, deploying, maintaining, and supporting a variety of systems. He is focused on quality of delivery, continually looking for opportunities to improve across the full software delivery lifecycle.\n\nAndrew has extensive knowledge of the Microsoft development ecosystem having worked with all versions of the .NET platform to develop enterprise applications.",
+                            Name = "Andy White"
+                        });
+                });
 
             modelBuilder.Entity("CodeBuildDeploy.Blogs.DA.Entities.Category", b =>
                 {
@@ -64,10 +119,9 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Author")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Author_Id");
 
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier")
@@ -108,6 +162,8 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AuthorId");
+
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Post", "blg");
@@ -116,7 +172,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("30c34d37-a663-4879-a294-e1b78431d611"),
-                            Author = "Mark Pollard",
+                            AuthorId = new Guid("50f29cf4-ab70-4e9f-b225-4fc31ce5b4f6"),
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "Libraries",
                             Description = "This section lists libraries I often use. These range from logging frameworks to testing tools used for testing / mocking etc.",
@@ -130,7 +186,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("26d005b9-5505-4646-9194-cd8358817ac8"),
-                            Author = "Mark Pollard",
+                            AuthorId = new Guid("50f29cf4-ab70-4e9f-b225-4fc31ce5b4f6"),
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "Tools",
                             Description = "This section lists the tools I frequently use. Some are development tools others utility tools making general day to day working easier.",
@@ -144,7 +200,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("ca8d885a-3a24-4c5b-bb33-61a7956b8996"),
-                            Author = "Mark Pollard",
+                            AuthorId = new Guid("50f29cf4-ab70-4e9f-b225-4fc31ce5b4f6"),
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "PowerShellRemoting",
                             Description = "This section talks about how to enable and work with powershell remoting.",
@@ -158,7 +214,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("0b7fe257-0429-4da1-94a2-89dbaa0aa583"),
-                            Author = "Mark Pollard",
+                            AuthorId = new Guid("50f29cf4-ab70-4e9f-b225-4fc31ce5b4f6"),
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "WSLInterop",
                             Description = "Read how to seamlessly call Linux commands, such as grep, directly from Powershell on you Windows machine.",
@@ -172,7 +228,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("d1ef2a8d-07bd-49cf-a785-a727567e9fc9"),
-                            Author = "Mark Pollard",
+                            AuthorId = new Guid("50f29cf4-ab70-4e9f-b225-4fc31ce5b4f6"),
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "WslAnsible",
                             Description = "Read how to setup Ansible on Windows Subsystem for Linux, including setting up for seamlessly calling from windows powershell.",
@@ -186,7 +242,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("3e54714a-521d-484c-871c-a85ab52642ea"),
-                            Author = "Mark Pollard",
+                            AuthorId = new Guid("50f29cf4-ab70-4e9f-b225-4fc31ce5b4f6"),
                             CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
                             Content = "TrunkBasedDev",
                             Description = "Trunk Based Development is a branching strategy that operates with no long-running branches. Commits are made directly on main and releases come from builds of main.",
@@ -200,7 +256,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("c5fecdc6-549a-41ce-ad63-fc8db2ab4e01"),
-                            Author = "Mark Pollard",
+                            AuthorId = new Guid("50f29cf4-ab70-4e9f-b225-4fc31ce5b4f6"),
                             CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Content = "MyShell",
                             Description = "Having fun customizing my terminal and making my prompt look awesome, with Oh my Posh 3 and Nerd fonts.",
@@ -214,7 +270,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("d8632d22-eb92-41a6-b3c4-dc1235846084"),
-                            Author = "Mark Pollard",
+                            AuthorId = new Guid("50f29cf4-ab70-4e9f-b225-4fc31ce5b4f6"),
                             CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
                             Content = "DevOpsCLI",
                             Description = "A container configured with all the CLI tools, scripts and extensions, a full stack DevOps cultured engineer needs for managing Azure environments resources such as AKS clusters.",
@@ -228,7 +284,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         new
                         {
                             Id = new Guid("6181d9cc-ef13-42b3-aa66-ef2dc5b54fae"),
-                            Author = "Andrew White",
+                            AuthorId = new Guid("1e7c80bb-eaaa-4d36-9e28-573bf9c0e3d4"),
                             CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
                             Content = "ZeroBugs",
                             Description = "It is impossible for software engineers to continuously produce bug-free, production ready code. Bugs will always exist. This article is about how we effectively handle such issues, acheiving a state of zero bugs backlog.",
@@ -463,11 +519,19 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
 
             modelBuilder.Entity("CodeBuildDeploy.Blogs.DA.Entities.Post", b =>
                 {
+                    b.HasOne("CodeBuildDeploy.Blogs.DA.Entities.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("CodeBuildDeploy.Blogs.DA.Entities.Category", "Category")
                         .WithMany("Posts")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Author");
 
                     b.Navigation("Category");
                 });

@@ -9,6 +9,7 @@ namespace CodeBuildDeploy.Blogs.BusinessLogic.Mapping
         {
             CreateMap<Category, Contract.Dto.Category>();
             CreateMap<Tag, Contract.Dto.Tag>();
+            CreateMap<Author, Contract.Dto.Author>();
             CreateMap<Post, Contract.Dto.Post>()
                 .ForMember(post => post.Tags, options => options.MapFrom(post => post.PostTags.Select(postTag => postTag.Tag)));
         }

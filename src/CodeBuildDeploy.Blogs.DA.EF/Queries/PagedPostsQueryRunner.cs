@@ -21,6 +21,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Queries
         {
             var dbPosts = await _dbContext.Posts
                 .Include(p => p.Category)
+                .Include(p => p.Author)
                 .Include(p => p.PostTags)
                 .ThenInclude(pt => pt.Tag)
                 .Where(p => p.Published)

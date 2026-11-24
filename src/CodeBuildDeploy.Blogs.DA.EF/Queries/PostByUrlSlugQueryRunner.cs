@@ -18,6 +18,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Queries
         {
             var dbPost = await _dbContext.Posts
                 .Include(p => p.Category)
+                .Include(p => p.Author)
                 .Include(p => p.PostTags)
                 .ThenInclude(pt => pt.Tag)
                 .SingleAsync(p => p.UrlSlug == query.UrlSlug);

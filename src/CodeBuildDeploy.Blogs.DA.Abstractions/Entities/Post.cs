@@ -18,7 +18,9 @@
 
         public DateTime? Modified { get; set; }
 
-        public string Author { get; set; } = null!;
+        public Guid AuthorId { get; set; }
+
+        public Author Author { get; set; } = null!;
 
         public Guid CategoryId { get; set; }
 

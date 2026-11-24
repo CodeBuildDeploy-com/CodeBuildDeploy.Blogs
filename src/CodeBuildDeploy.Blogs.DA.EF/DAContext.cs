@@ -14,6 +14,7 @@ namespace CodeBuildDeploy.Blogs.DA.EF
         }
 
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Author> Authors { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Category> Categories { get; set; }
 
@@ -43,6 +44,18 @@ namespace CodeBuildDeploy.Blogs.DA.EF
                 entity.HasData(Entities.Tags.GetDefault());
             });
 
+            modelBuilder.Entity<Author>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Name).HasMaxLength(40);
+                entity.Property(e => e.Biography).HasMaxLength(2000);
+                entity.Property(e => e.AvatarPath).HasMaxLength(200);
+                entity.Property(e => e.LinkedInUrl).HasMaxLength(400);
+                entity.Property(e => e.TwitterUrl).HasMaxLength(400);
+                entity.Property(e => e.FacebookUrl).HasMaxLength(400);
+                entity.HasData(Entities.Authors.GetDefault());
+            });
+
             modelBuilder.Entity<Post>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -52,7 +65,8 @@ namespace CodeBuildDeploy.Blogs.DA.EF
                 entity.Property(e => e.Title).HasMaxLength(50);
                 entity.Property(e => e.ShortDescription).HasMaxLength(50);
                 entity.Property(e => e.Description).HasMaxLength(300);
-                entity.Property(e => e.Author).HasMaxLength(40);
+                entity.HasOne(e => e.Author).WithMany().HasForeignKey(e => e.AuthorId).OnDelete(DeleteBehavior.Restrict);
+                entity.Property(e => e.AuthorId).HasColumnName("Author_Id");
                 entity.HasData(Entities.Posts.GetDefault());
             });
 

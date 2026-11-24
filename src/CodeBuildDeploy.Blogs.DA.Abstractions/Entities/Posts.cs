@@ -15,7 +15,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2015-03-31 00:00:00"),
                     Modified = DateTime.Parse("2015-03-31 00:00:00"),
-                    Author = "Mark Pollard",
+                    AuthorId = Authors.MarkPollardId,
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "Libraries" },
                 
@@ -28,7 +28,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2015-03-31 00:00:00"),
                     Modified = DateTime.Parse("2024-06-17 00:00:00"),
-                    Author = "Mark Pollard",
+                    AuthorId = Authors.MarkPollardId,
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "Tools" },
                 
@@ -41,7 +41,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2015-05-31 00:00:00"),
                     Modified = DateTime.Parse("2015-05-31 00:00:00"),
-                    Author = "Mark Pollard",
+                    AuthorId = Authors.MarkPollardId,
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "PowerShellRemoting" },
 
@@ -54,7 +54,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2019-10-09 00:00:00"),
                     Modified = DateTime.Parse("2024-06-07 00:00:00"),
-                    Author = "Mark Pollard",
+                    AuthorId = Authors.MarkPollardId,
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "WSLInterop" },
 
@@ -67,7 +67,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2019-10-09 00:00:00"),
                     Modified = DateTime.Parse("2024-06-07 00:00:00"),
-                    Author = "Mark Pollard",
+                    AuthorId = Authors.MarkPollardId,
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "WslAnsible" },
                 
@@ -80,7 +80,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2021-10-11 00:00:00"),
                     Modified = DateTime.Parse("2021-10-11 00:00:00"),
-                    Author = "Mark Pollard",
+                    AuthorId = Authors.MarkPollardId,
                     CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
                     UrlSlug = "TrunkBasedDev" },
 
@@ -93,7 +93,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2024-06-10 00:00:00"),
                     Modified = DateTime.Parse("2024-06-10 00:00:00"),
-                    Author = "Mark Pollard",
+                    AuthorId = Authors.MarkPollardId,
                     CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                     UrlSlug = "MyShell" },
 
@@ -106,7 +106,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2024-06-18 00:00:00"),
                     Modified = DateTime.Parse("2024-06-18 00:00:00"),
-                    Author = "Mark Pollard",
+                    AuthorId = Authors.MarkPollardId,
                     CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
                     UrlSlug = "devops-cli-azenvs" },
 
@@ -120,7 +120,7 @@
                     Published = true,
                     PostedOn = DateTime.Parse("2024-06-18 00:00:00"),
                     Modified = DateTime.Parse("2024-06-18 00:00:00"),
-                    Author = "Andrew White",
+                    AuthorId = Authors.AndyWhiteId,
                     CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
                     UrlSlug = "ZeroBugs" }
             ];

@@ -16,7 +16,7 @@
                     PostedOn = DateTime.Parse("2015-03-31 00:00:00"),
                     Modified = DateTime.Parse("2015-03-31 00:00:00"),
                     AuthorId = Authors.MarkPollardId,
-                    CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
+                    CategoryId = Categories.WorkstationSetupId,
                     UrlSlug = "Libraries" },
                 
                 new() {
@@ -29,7 +29,7 @@
                     PostedOn = DateTime.Parse("2015-03-31 00:00:00"),
                     Modified = DateTime.Parse("2024-06-17 00:00:00"),
                     AuthorId = Authors.MarkPollardId,
-                    CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
+                    CategoryId = Categories.WorkstationSetupId,
                     UrlSlug = "Tools" },
                 
                 new() {
@@ -42,7 +42,7 @@
                     PostedOn = DateTime.Parse("2015-05-31 00:00:00"),
                     Modified = DateTime.Parse("2015-05-31 00:00:00"),
                     AuthorId = Authors.MarkPollardId,
-                    CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
+                    CategoryId = Categories.WorkstationSetupId,
                     UrlSlug = "PowerShellRemoting" },
 
                 new() {
@@ -55,7 +55,7 @@
                     PostedOn = DateTime.Parse("2019-10-09 00:00:00"),
                     Modified = DateTime.Parse("2024-06-07 00:00:00"),
                     AuthorId = Authors.MarkPollardId,
-                    CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
+                    CategoryId = Categories.WorkstationSetupId,
                     UrlSlug = "WSLInterop" },
 
                 new() {
@@ -68,7 +68,7 @@
                     PostedOn = DateTime.Parse("2019-10-09 00:00:00"),
                     Modified = DateTime.Parse("2024-06-07 00:00:00"),
                     AuthorId = Authors.MarkPollardId,
-                    CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
+                    CategoryId = Categories.WorkstationSetupId,
                     UrlSlug = "WslAnsible" },
                 
                 new() {
@@ -81,7 +81,7 @@
                     PostedOn = DateTime.Parse("2021-10-11 00:00:00"),
                     Modified = DateTime.Parse("2021-10-11 00:00:00"),
                     AuthorId = Authors.MarkPollardId,
-                    CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
+                    CategoryId = Categories.SoftwareDeliveryId,
                     UrlSlug = "TrunkBasedDev" },
 
                 new() {
@@ -94,7 +94,7 @@
                     PostedOn = DateTime.Parse("2024-06-10 00:00:00"),
                     Modified = DateTime.Parse("2024-06-10 00:00:00"),
                     AuthorId = Authors.MarkPollardId,
-                    CategoryId = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
+                    CategoryId = Categories.WorkstationSetupId,
                     UrlSlug = "MyShell" },
 
                 new() {
@@ -107,7 +107,7 @@
                     PostedOn = DateTime.Parse("2024-06-18 00:00:00"),
                     Modified = DateTime.Parse("2024-06-18 00:00:00"),
                     AuthorId = Authors.MarkPollardId,
-                    CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
+                    CategoryId = Categories.SoftwareDeliveryId,
                     UrlSlug = "devops-cli-azenvs" },
 
 
@@ -121,8 +121,50 @@
                     PostedOn = DateTime.Parse("2024-06-18 00:00:00"),
                     Modified = DateTime.Parse("2024-06-18 00:00:00"),
                     AuthorId = Authors.AndyWhiteId,
-                    CategoryId = new Guid("09a8afe4-d726-43f6-9878-41ca1a4d5b39"),
-                    UrlSlug = "ZeroBugs" }
+                    CategoryId = Categories.SoftwareDeliveryId,
+                    UrlSlug = "ZeroBugs" },
+
+                new()
+                {
+                    Id = new Guid("cd018418-5306-418e-9469-d137d38f3395"),
+                    Title = "Network and edge",
+                    ShortDescription = "Routing, DNS and private ingress",
+                    Description = "How I run the HomeLab network and publish the CodeBuildDeploy dev sites through a private connection to Azure.",
+                    Content = "HomeLabNetworkAndEdge",
+                    Published = true,
+                    PostedOn = new DateTime(2026, 11, 25),
+                    AuthorId = Authors.MarkPollardId,
+                    CategoryId = Categories.HomeLabSetupId,
+                    UrlSlug = "homelab-network-and-edge"
+                },
+
+                new()
+                {
+                    Id = new Guid("5229849a-3b83-4b6e-b75d-f0a2153e2a08"),
+                    Title = "Proxmox cluster",
+                    ShortDescription = "Virtualization, storage and backups",
+                    Description = "How I use a three-node Proxmox cluster to run home automation, media services, cameras and development workstations.",
+                    Content = "HomeLabProxmoxCluster",
+                    Published = true,
+                    PostedOn = new DateTime(2026, 11, 25),
+                    AuthorId = Authors.MarkPollardId,
+                    CategoryId = Categories.HomeLabSetupId,
+                    UrlSlug = "homelab-proxmox-cluster"
+                },
+
+                new()
+                {
+                    Id = new Guid("79a91732-fb8b-4e43-aded-1112b6ed61a9"),
+                    Title = "Azure Infrastructure",
+                    ShortDescription = "Terraform, Azure DevOps and AKS",
+                    Description = "How I provision CodeBuildDeploy on Azure with Terraform and deploy the application to Kubernetes with Helm.",
+                    Content = "HomeLabAzureInfrastructure",
+                    Published = true,
+                    PostedOn = new DateTime(2026, 11, 25),
+                    AuthorId = Authors.MarkPollardId,
+                    CategoryId = Categories.HomeLabSetupId,
+                    UrlSlug = "homelab-azure-infrastructure"
+                }
             ];
         }
     }

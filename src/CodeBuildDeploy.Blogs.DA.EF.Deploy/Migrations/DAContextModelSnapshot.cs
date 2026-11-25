@@ -107,6 +107,12 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         },
                         new
                         {
+                            Id = new Guid("42eac5c9-5d16-49d4-869d-bf050cdaa0e0"),
+                            Description = "How I run the network, Proxmox cluster, and Azure infrastructure behind the HomeLab and CodeBuildDeploy.",
+                            Name = "HomeLab Setup"
+                        },
+                        new
+                        {
                             Id = new Guid("fc3cb34b-53c9-4342-a139-9ecf6b134008"),
                             Description = "An engineers workstation setup is an imperative part of their capability to deliver software effectively, comfortably and productively. This section details the setups of the CodeBuildDeploy family. It includes articles on how to setup tools that we find useful.",
                             Name = "Workstation Setup"
@@ -294,6 +300,45 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                             ShortDescription = "Delete all the bugs from your backlog, now!",
                             Title = "Zero Bugs",
                             UrlSlug = "ZeroBugs"
+                        },
+                        new
+                        {
+                            Id = new Guid("cd018418-5306-418e-9469-d137d38f3395"),
+                            AuthorId = new Guid("50f29cf4-ab70-4e9f-b225-4fc31ce5b4f6"),
+                            CategoryId = new Guid("42eac5c9-5d16-49d4-869d-bf050cdaa0e0"),
+                            Content = "HomeLabNetworkAndEdge",
+                            Description = "How I run the HomeLab network and publish the CodeBuildDeploy dev sites through a private connection to Azure.",
+                            PostedOn = new DateTime(2026, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Published = true,
+                            ShortDescription = "Routing, DNS and private ingress",
+                            Title = "Network and edge",
+                            UrlSlug = "homelab-network-and-edge"
+                        },
+                        new
+                        {
+                            Id = new Guid("5229849a-3b83-4b6e-b75d-f0a2153e2a08"),
+                            AuthorId = new Guid("50f29cf4-ab70-4e9f-b225-4fc31ce5b4f6"),
+                            CategoryId = new Guid("42eac5c9-5d16-49d4-869d-bf050cdaa0e0"),
+                            Content = "HomeLabProxmoxCluster",
+                            Description = "How I use a three-node Proxmox cluster to run home automation, media services, cameras and development workstations.",
+                            PostedOn = new DateTime(2026, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Published = true,
+                            ShortDescription = "Virtualization, storage and backups",
+                            Title = "Proxmox cluster",
+                            UrlSlug = "homelab-proxmox-cluster"
+                        },
+                        new
+                        {
+                            Id = new Guid("79a91732-fb8b-4e43-aded-1112b6ed61a9"),
+                            AuthorId = new Guid("50f29cf4-ab70-4e9f-b225-4fc31ce5b4f6"),
+                            CategoryId = new Guid("42eac5c9-5d16-49d4-869d-bf050cdaa0e0"),
+                            Content = "HomeLabAzureInfrastructure",
+                            Description = "How I provision CodeBuildDeploy on Azure with Terraform and deploy the application to Kubernetes with Helm.",
+                            PostedOn = new DateTime(2026, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Published = true,
+                            ShortDescription = "Terraform, Azure DevOps and AKS",
+                            Title = "Azure Infrastructure",
+                            UrlSlug = "homelab-azure-infrastructure"
                         });
                 });
 

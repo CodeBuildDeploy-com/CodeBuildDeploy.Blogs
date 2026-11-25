@@ -458,6 +458,96 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                         {
                             PostId = new Guid("6181d9cc-ef13-42b3-aa66-ef2dc5b54fae"),
                             TagId = new Guid("48306da3-dab0-4b0e-b063-0acbaf126891")
+                        },
+                        new
+                        {
+                            PostId = new Guid("cd018418-5306-418e-9469-d137d38f3395"),
+                            TagId = new Guid("79215531-adc8-4635-8777-b1a859eee870")
+                        },
+                        new
+                        {
+                            PostId = new Guid("cd018418-5306-418e-9469-d137d38f3395"),
+                            TagId = new Guid("03bbd02b-0b2c-4eff-9874-8561b8bbcafa")
+                        },
+                        new
+                        {
+                            PostId = new Guid("cd018418-5306-418e-9469-d137d38f3395"),
+                            TagId = new Guid("9dd59d5f-d44e-4cc1-b16b-ef4ed12688e6")
+                        },
+                        new
+                        {
+                            PostId = new Guid("cd018418-5306-418e-9469-d137d38f3395"),
+                            TagId = new Guid("becbd21d-f175-48fa-a0b1-473920a72709")
+                        },
+                        new
+                        {
+                            PostId = new Guid("cd018418-5306-418e-9469-d137d38f3395"),
+                            TagId = new Guid("a5b98f7f-be9e-4bf7-9645-db7c5a1aa1f2")
+                        },
+                        new
+                        {
+                            PostId = new Guid("cd018418-5306-418e-9469-d137d38f3395"),
+                            TagId = new Guid("451c526e-fa0e-42ca-a347-912131719bd5")
+                        },
+                        new
+                        {
+                            PostId = new Guid("cd018418-5306-418e-9469-d137d38f3395"),
+                            TagId = new Guid("8df60d46-9a9d-46e1-b90d-d9bac8110ef7")
+                        },
+                        new
+                        {
+                            PostId = new Guid("cd018418-5306-418e-9469-d137d38f3395"),
+                            TagId = new Guid("716cfff3-594a-4074-875b-d5b958807910")
+                        },
+                        new
+                        {
+                            PostId = new Guid("5229849a-3b83-4b6e-b75d-f0a2153e2a08"),
+                            TagId = new Guid("04e9a93b-dd12-4217-99cb-ece19c0b567f")
+                        },
+                        new
+                        {
+                            PostId = new Guid("5229849a-3b83-4b6e-b75d-f0a2153e2a08"),
+                            TagId = new Guid("03bbd02b-0b2c-4eff-9874-8561b8bbcafa")
+                        },
+                        new
+                        {
+                            PostId = new Guid("5229849a-3b83-4b6e-b75d-f0a2153e2a08"),
+                            TagId = new Guid("8df60d46-9a9d-46e1-b90d-d9bac8110ef7")
+                        },
+                        new
+                        {
+                            PostId = new Guid("5229849a-3b83-4b6e-b75d-f0a2153e2a08"),
+                            TagId = new Guid("1e82ea7d-e3a9-4911-b8c0-2a632bbba34a")
+                        },
+                        new
+                        {
+                            PostId = new Guid("79a91732-fb8b-4e43-aded-1112b6ed61a9"),
+                            TagId = new Guid("f4547542-2b7f-4f9e-8a30-01850657a6b2")
+                        },
+                        new
+                        {
+                            PostId = new Guid("79a91732-fb8b-4e43-aded-1112b6ed61a9"),
+                            TagId = new Guid("5feaaaff-76c9-4376-8ba7-af5314f4721d")
+                        },
+                        new
+                        {
+                            PostId = new Guid("79a91732-fb8b-4e43-aded-1112b6ed61a9"),
+                            TagId = new Guid("f02e7311-6c1c-497b-a9f9-7a55132c517b")
+                        },
+                        new
+                        {
+                            PostId = new Guid("79a91732-fb8b-4e43-aded-1112b6ed61a9"),
+                            TagId = new Guid("37519618-949c-48dd-a099-9f991b950ada")
+                        },
+                        new
+                        {
+                            PostId = new Guid("79a91732-fb8b-4e43-aded-1112b6ed61a9"),
+                            TagId = new Guid("41f7feda-af81-4e8c-85bf-0c33188bfeb3")
+                        },
+                        new
+                        {
+                            PostId = new Guid("79a91732-fb8b-4e43-aded-1112b6ed61a9"),
+                            TagId = new Guid("8df60d46-9a9d-46e1-b90d-d9bac8110ef7")
                         });
                 });
 
@@ -559,6 +649,72 @@ namespace CodeBuildDeploy.Blogs.DA.EF.Deploy.Migrations
                             Id = new Guid("48306da3-dab0-4b0e-b063-0acbaf126891"),
                             Description = "Tracking and planning of project issues",
                             Name = "Issue Management"
+                        },
+                        new
+                        {
+                            Id = new Guid("79215531-adc8-4635-8777-b1a859eee870"),
+                            Description = "Routing, switching and network infrastructure",
+                            Name = "Network"
+                        },
+                        new
+                        {
+                            Id = new Guid("9dd59d5f-d44e-4cc1-b16b-ef4ed12688e6"),
+                            Description = "FriendlyElec firmware based on OpenWrt",
+                            Name = "FriendlyWrt"
+                        },
+                        new
+                        {
+                            Id = new Guid("becbd21d-f175-48fa-a0b1-473920a72709"),
+                            Description = "Domain Name System and recursive resolvers",
+                            Name = "DNS"
+                        },
+                        new
+                        {
+                            Id = new Guid("a5b98f7f-be9e-4bf7-9645-db7c5a1aa1f2"),
+                            Description = "Network-wide DNS filtering",
+                            Name = "Pi-hole"
+                        },
+                        new
+                        {
+                            Id = new Guid("451c526e-fa0e-42ca-a347-912131719bd5"),
+                            Description = "NGINX and Nginx Proxy Manager",
+                            Name = "NGINX"
+                        },
+                        new
+                        {
+                            Id = new Guid("716cfff3-594a-4074-875b-d5b958807910"),
+                            Description = "WireGuard VPN tunnels",
+                            Name = "WireGuard"
+                        },
+                        new
+                        {
+                            Id = new Guid("04e9a93b-dd12-4217-99cb-ece19c0b567f"),
+                            Description = "Proxmox Virtual Environment",
+                            Name = "Proxmox"
+                        },
+                        new
+                        {
+                            Id = new Guid("1e82ea7d-e3a9-4911-b8c0-2a632bbba34a"),
+                            Description = "Linux Containers",
+                            Name = "LXC"
+                        },
+                        new
+                        {
+                            Id = new Guid("5feaaaff-76c9-4376-8ba7-af5314f4721d"),
+                            Description = "Infrastructure as code with Terraform",
+                            Name = "Terraform"
+                        },
+                        new
+                        {
+                            Id = new Guid("f02e7311-6c1c-497b-a9f9-7a55132c517b"),
+                            Description = "Azure DevOps pipelines and deployments",
+                            Name = "Azure DevOps"
+                        },
+                        new
+                        {
+                            Id = new Guid("41f7feda-af81-4e8c-85bf-0c33188bfeb3"),
+                            Description = "Packaging and deploying Kubernetes applications",
+                            Name = "Helm"
                         });
                 });
 
